@@ -16,7 +16,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative bg-[#1B262E] px-6 py-24 md:py-32">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]">
+        <div className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]">
           <span>00:04</span>
           <span className="h-px flex-1 bg-[#FFA649]/20" />
           <span className="text-[#8FA1AD]">Start a project</span>
@@ -24,7 +24,7 @@ export default function Contact() {
 
         <div className="grid gap-16 md:grid-cols-[1fr_1.1fr]">
           <div>
-            <h2 className="font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl">
+            <h2 className="font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl">
               Tell us the brief. We&rsquo;ll tell you the timeline.
             </h2>
             <p className="mt-6 max-w-md text-[#C9D3D9]">
@@ -32,7 +32,7 @@ export default function Contact() {
               steps, or a straight &ldquo;not a fit&rdquo; if that&rsquo;s the truth.
             </p>
 
-            <div className="mt-10 space-y-4 font-[family-name:var(--font-mono)] text-sm">
+            <div className="mt-10 space-y-4 font-mono text-sm">
               <div className="flex items-center gap-3 text-[#8FA1AD]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#FFA649]" />
                 <span className="text-[#F3ECE0]">hello@cutlinestudio.co</span>
@@ -46,11 +46,11 @@ export default function Contact() {
 
           <div className="rounded-2xl border border-[#FFA649]/10 bg-[#283845] p-6 sm:p-8">
             {submitted ? (
-              <div className="flex h-full min-h-[320px] flex-col items-center justify-center text-center">
-                <span className="font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]">
+              <div className="flex h-full min-h-80 flex-col items-center justify-center text-center">
+                <span className="font-mono text-xs uppercase tracking-widest text-[#FFA649]">
                   Sent
                 </span>
-                <h3 className="mt-3 font-[family-name:var(--font-display)] text-2xl text-[#F3ECE0]">
+                <h3 className="mt-3 font-[--font-display] text-2xl text-[#F3ECE0]">
                   Brief received.
                 </h3>
                 <p className="mt-2 max-w-xs text-sm text-[#C9D3D9]">
