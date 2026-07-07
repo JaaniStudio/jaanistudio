@@ -1,91 +1,72 @@
 'use client';
 
-import { useState, type FormEvent, useEffect, useRef } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useState, type FormEvent, useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const PROJECT_TYPES = ['Website', 'Brand video', 'Motion graphics', 'Ongoing content', 'Not sure yet'];
 
+const fieldVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const, delay: i * 0.07 },
+  }),
+};
+
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const submitBtnRef = useRef<HTMLButtonElement>(null);
-
-  const sectionRef = useScrollReveal<HTMLElement>(['.contact-header', '.contact-heading', '.contact-text', '.contact-info']);
-
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
   const formRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { animate, stagger } = await import('animejs');
-      if (cancelled || !formRef.current) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            const fields = formRef.current?.querySelectorAll<HTMLElement>('.form-field');
-            if (!fields?.length) return;
-            animate(fields, {
-              translateY: [20, 0],
-              opacity: [0, 1],
-              duration: 500,
-              delay: stagger(80),
-              ease: 'outExpo',
-            });
-            observer.unobserve(entry.target);
-          }
-        },
-        { threshold: 0.15 }
-      );
-      if (formRef.current) observer.observe(formRef.current);
-    })();
-    return () => { cancelled = true; };
-  }, []);
+  const formInView = useInView(formRef, { once: true, margin: '-40px' });
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(true);
   }
 
-  useEffect(() => {
-    if (!submitted || !submitBtnRef.current) return;
-    let cancelled = false;
-    (async () => {
-      const { animate } = await import('animejs');
-      if (cancelled) return;
-      const checkmark = submitBtnRef.current?.querySelector('.checkmark');
-      if (checkmark) {
-        animate(checkmark, {
-          scale: [0, 1],
-          rotate: [45, 0],
-          duration: 400,
-          ease: 'outBack',
-        });
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [submitted]);
-
   return (
     <section id="contact" className="relative bg-[#1B262E] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
-        <div className="contact-header mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]">
+        <motion.div
+          className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <span>00:04</span>
           <span className="h-px flex-1 bg-[#FFA649]/20" />
           <span className="text-[#8FA1AD]">Start a project</span>
-        </div>
+        </motion.div>
 
         <div className="grid gap-16 md:grid-cols-[1fr_1.1fr]">
           <div>
-            <h2 className="contact-heading font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl">
+            <motion.h2
+              className="font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+              initial={{ y: 30, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            >
               Tell us the brief. We&rsquo;ll tell you the timeline.
-            </h2>
-            <p className="contact-text mt-6 max-w-md text-[#C9D3D9]">
+            </motion.h2>
+            <motion.p
+              className="mt-6 max-w-md text-[#C9D3D9]"
+              initial={{ y: 20, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
               Send a few lines about what you need. We reply within one business day with next
               steps, or a straight &ldquo;not a fit&rdquo; if that&rsquo;s the truth — no
               three-week &ldquo;we&rsquo;ll circle back.&rdquo;
-            </p>
+            </motion.p>
 
-            <div className="contact-info mt-10 space-y-4 font-[family-name:var(--font-mono)] text-sm">
+            <motion.div
+              className="mt-10 space-y-4 font-[family-name:var(--font-mono)] text-sm"
+              initial={{ y: 20, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            >
               <div className="group flex items-center gap-3 text-[#8FA1AD] transition-all duration-300 hover:text-[#FFA649]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#FFA649] transition-all duration-300 group-hover:scale-125" />
                 <span className="text-[#F3ECE0] transition-all duration-300 group-hover:text-[#FFA649]">
@@ -99,106 +80,152 @@ export default function Contact() {
                 </span>
                 <span>Currently booking for Q3 2026</span>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          <div
+          <motion.div
             ref={formRef}
             className="rounded-2xl border border-[#FFA649]/10 bg-[#283845] p-6 transition-all duration-500 hover:border-[#FFA649]/20 hover:shadow-[0_0_40px_rgba(255,166,73,0.05)] sm:p-8"
+            initial={{ x: 30, opacity: 0 }}
+            animate={isInView ? { x: 0, opacity: 1 } : {}}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           >
-            {submitted ? (
-              <div className="flex h-full min-h-[320px] flex-col items-center justify-center text-center">
-                <span
-                  ref={submitBtnRef}
-                  className="checkmark inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  key="success"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex h-full min-h-[320px] flex-col items-center justify-center text-center"
                 >
-                  <span className="inline-block">✓</span> Sent
-                </span>
-                <h3 className="mt-3 font-[family-name:var(--font-display)] text-2xl text-[#F3ECE0]">
-                  Say less, jaani.
-                </h3>
-                <p className="mt-2 max-w-xs text-sm text-[#C9D3D9]">
-                  Brief received — we&rsquo;ll reply within one business day, coffee in hand.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="form-field grid gap-5 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-
-                      className="w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
-                      placeholder="Jordan Kane"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-
-                      className="w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
-                      placeholder="jordan@brand.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="type" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
-                    Project type
-                  </label>
-                  <select
-                    id="type"
-                    name="type"
-                    defaultValue={PROJECT_TYPES[0]}
-                    className="w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                  <motion.span
+                    className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.1 }}
                   >
-                    {PROJECT_TYPES.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
-                    Brief
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-
-                    className="w-full resize-none rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
-                    placeholder="What are you building, and by when?"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="form-field group relative w-full overflow-hidden rounded-lg bg-[#FFA649] py-3.5 text-sm font-semibold text-[#1B262E] transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.02] hover:shadow-[0_10px_30px_-8px_rgba(255,166,73,0.6)] active:scale-[0.97]"
+                    <motion.span
+                      className="inline-block"
+                      initial={{ rotate: 45, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                    >
+                      ✓
+                    </motion.span>
+                    {' '}Sent
+                  </motion.span>
+                  <h3 className="mt-3 font-[family-name:var(--font-display)] text-2xl text-[#F3ECE0]">
+                    Say less, jaani.
+                  </h3>
+                  <p className="mt-2 max-w-xs text-sm text-[#C9D3D9]">
+                    Brief received — we&rsquo;ll reply within one business day, coffee in hand.
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                  initial="hidden"
+                  animate={formInView ? 'visible' : 'hidden'}
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Send brief
-                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </span>
-                </button>
-              </form>
-            )}
-          </div>
+                  <motion.div custom={0} variants={fieldVariants} className="grid gap-5 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="name" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
+                        Name
+                      </label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        className="w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                        placeholder="Jordan Kane"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
+                        Email
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        className="w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                        placeholder="jordan@brand.com"
+                      />
+                    </div>
+                  </motion.div>
+
+                  <motion.div custom={1} variants={fieldVariants}>
+                    <label htmlFor="type" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
+                      Project type
+                    </label>
+                    <select
+                      id="type"
+                      name="type"
+                      defaultValue={PROJECT_TYPES[0]}
+                      className="w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                    >
+                      {PROJECT_TYPES.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
+                      ))}
+                    </select>
+                  </motion.div>
+
+                  <motion.div custom={2} variants={fieldVariants}>
+                    <label htmlFor="message" className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
+                      Brief
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      required
+                      className="w-full resize-none rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:scale-[1.01] focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                      placeholder="What are you building, and by when?"
+                    />
+                  </motion.div>
+
+                  <motion.button
+                    custom={3}
+                    variants={fieldVariants}
+                    type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="group relative w-full overflow-hidden rounded-lg bg-[#FFA649] py-3.5 text-sm font-semibold text-[#1B262E] transition-all duration-300 hover:shadow-[0_10px_30px_-8px_rgba(255,166,73,0.6)]"
+                    data-cursor
+                  >
+                    <motion.span
+                      className="pointer-events-none absolute inset-0 rounded-lg"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      style={{
+                        background:
+                          'radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.15), transparent 50%)',
+                      }}
+                    />
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      Send brief
+                      <motion.span
+                        className="inline-block"
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 4 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                      >
+                        →
+                      </motion.span>
+                    </span>
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </section>

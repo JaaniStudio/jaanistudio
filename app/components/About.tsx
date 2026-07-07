@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import { motion, useInView } from 'framer-motion';
 
 const META = [
   { label: 'Founded', value: '2021' },
@@ -21,15 +21,21 @@ const TOOLS = [
   'Cinema 4D',
 ];
 
-export default function About() {
-  const sectionRef = useScrollReveal<HTMLElement>([
-    '.about-header',
-    '.about-heading',
-    '.about-text',
-    '.about-text-2',
-  ]);
+const staggerItem = {
+  hidden: { y: 30, opacity: 0 },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: i * 0.1 },
+  }),
+};
 
-  const metaRef = useScrollReveal<HTMLDListElement>(['.meta-item'], undefined, { threshold: 0.1 });
+export default function About() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
+
+  const metaRef = useRef<HTMLDListElement>(null);
+  const metaInView = useInView(metaRef, { once: true, margin: '-60px' });
 
   const marqueeRef = useRef<HTMLDivElement>(null);
 
@@ -53,35 +59,62 @@ export default function About() {
   return (
     <section id="about" className="relative bg-[#283845] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
-        <div className="about-header mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]">
+        <motion.div
+          className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <span>00:01</span>
           <span className="h-px flex-1 bg-[#FFA649]/20" />
           <span className="text-[#8FA1AD]">About</span>
-        </div>
+        </motion.div>
 
         <div className="grid gap-16 md:grid-cols-[1.3fr_1fr]">
           <div>
-            <h2 className="about-heading font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl">
+            <motion.h2
+              className="font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+              initial={{ y: 40, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            >
               We started as two freelancers arguing over the same export settings, three energy
               drinks deep.
-            </h2>
-            <p className="about-text mt-6 max-w-lg text-[#C9D3D9]">
+            </motion.h2>
+            <motion.p
+              className="mt-6 max-w-lg text-[#C9D3D9]"
+              initial={{ y: 30, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
               Now Jaani Studio builds the site and cuts the footage for the same brands, on the
               same timeline. No handoff between &ldquo;the web team&rdquo; and &ldquo;the video
               team&rdquo; — one crew, one brief, one deadline. That&rsquo;s the whole pitch.
-            </p>
-            <p className="about-text-2 mt-4 max-w-lg text-[#C9D3D9]">
+            </motion.p>
+            <motion.p
+              className="mt-4 max-w-lg text-[#C9D3D9]"
+              initial={{ y: 30, opacity: 0 }}
+              animate={isInView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            >
               We keep the client roster small on purpose. Fewer projects, more frames reviewed,
               fewer things that ship half-finished — and yes, we will tell you if your idea needs
               work before your competitors do.
-            </p>
+            </motion.p>
           </div>
 
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[#FFA649]/10 bg-[#FFA649]/5 sm:grid-cols-1" ref={metaRef}>
-            {META.map((item) => (
-              <div
+          <motion.dl
+            ref={metaRef}
+            className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[#FFA649]/10 bg-[#FFA649]/5 sm:grid-cols-1"
+            initial="hidden"
+            animate={metaInView ? 'visible' : 'hidden'}
+          >
+            {META.map((item, i) => (
+              <motion.div
                 key={item.label}
-                className="meta-item group bg-[#283845] px-6 py-5 transition-all duration-300 hover:bg-[#2f4150] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
+                custom={i}
+                variants={staggerItem}
+                className="group bg-[#283845] px-6 py-5 transition-all duration-300 hover:bg-[#2f4150] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
               >
                 <dt className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-widest text-[#8FA1AD]">
                   {item.label}
@@ -89,9 +122,9 @@ export default function About() {
                 <dd className="mt-1 text-lg font-semibold text-[#F3ECE0] transition-all duration-300 group-hover:text-[#FFA649] group-hover:translate-x-1">
                   {item.value}
                 </dd>
-              </div>
+              </motion.div>
             ))}
-          </dl>
+          </motion.dl>
         </div>
       </div>
 

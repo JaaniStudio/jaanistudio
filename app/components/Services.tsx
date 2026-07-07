@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Code2, Clapperboard, Sparkles, Scissors } from 'lucide-react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
+import TiltCard from './TiltCard';
 
 const SERVICES = [
   {
@@ -39,89 +40,87 @@ const SERVICES = [
   },
 ];
 
+const cardVariants = {
+  hidden: { y: 40, opacity: 0 },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: i * 0.1 },
+  }),
+};
+
 export default function Services() {
-  const headerRef = useScrollReveal<HTMLElement>(['.services-header', '.services-heading']);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
 
   const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      const { animate, stagger } = await import('animejs');
-      if (cancelled || !gridRef.current) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            const cards = gridRef.current?.querySelectorAll<HTMLElement>('.service-card');
-            if (!cards?.length) return;
-            animate(cards, {
-              translateY: [40, 0],
-              opacity: [0, 1],
-              duration: 700,
-              ease: 'outExpo',
-              delay: stagger(100),
-            });
-            observer.unobserve(entry.target);
-          }
-        },
-        { threshold: 0.1 }
-      );
-      observer.observe(gridRef.current);
-    })();
-    return () => { cancelled = true; };
-  }, []);
+  const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="services" className="relative bg-[#1B262E] px-6 py-24 md:py-32" ref={headerRef}>
+    <section id="services" className="relative bg-[#1B262E] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
-        <div className="services-header mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]">
+        <motion.div
+          className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+          initial={{ y: 20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <span>00:02</span>
           <span className="h-px flex-1 bg-[#FFA649]/20" />
           <span className="text-[#8FA1AD]">Services</span>
-        </div>
+        </motion.div>
 
-        <h2 className="services-heading max-w-2xl font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl">
+        <motion.h2
+          className="max-w-2xl font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+          initial={{ y: 30, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+        >
           Everything runs on one timeline.
-        </h2>
+        </motion.h2>
 
         <div ref={gridRef} className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-[#FFA649]/10 bg-[#FFA649]/5 md:grid-cols-2">
-          {SERVICES.map((service) => {
+          {SERVICES.map((service, i) => {
             const Icon = service.icon;
             return (
-              <div
+              <motion.div
                 key={service.track}
-                className="service-card relative bg-[#1B262E] p-8 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:z-10 hover:-translate-y-1 hover:bg-[#283845] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10"
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                animate={gridInView ? 'visible' : 'hidden'}
               >
-                <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 hover:opacity-100"
-                  style={{
-                    background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,166,73,0.04), transparent 60%)',
-                  }}
-                />
-                <div className="relative">
-                  <div className="mb-6 flex items-center justify-between">
-                    <span className="rounded border border-[#FFA649]/30 px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] text-[#FFA649]">
-                      TRACK / {service.track}
-                    </span>
-                    <Icon
-                      className="h-5 w-5 text-[#FFA649]/50 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:rotate-12 group-hover:text-[#FFA649]"
-                      strokeWidth={1.75}
-                    />
+                <TiltCard tiltDegree={4} glare={true} className="h-full">
+                  <div className="group relative bg-[#1B262E] p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#283845] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10">
+                    <div className="mb-6 flex items-center justify-between">
+                      <span className="rounded border border-[#FFA649]/30 px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] text-[#FFA649]">
+                        TRACK / {service.track}
+                      </span>
+                      <motion.div
+                        whileHover={{ rotate: 12, scale: 1.1 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 12 }}
+                      >
+                        <Icon
+                          className="h-5 w-5 text-[#FFA649]/50 transition-colors duration-300 group-hover:text-[#FFA649]"
+                          strokeWidth={1.75}
+                        />
+                      </motion.div>
+                    </div>
+                    <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[#F3ECE0] sm:text-2xl">
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 text-[#C9D3D9]">{service.description}</p>
+                    <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+                      {service.items.map((item) => (
+                        <li key={item} className="flex items-center gap-2 text-sm text-[#8FA1AD]">
+                          <span className="h-1 w-1 rounded-full bg-[#FFA649]" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[#F3ECE0] sm:text-2xl">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-[#C9D3D9]">{service.description}</p>
-                  <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-                    {service.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-[#8FA1AD]">
-                        <span className="h-1 w-1 rounded-full bg-[#FFA649]" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+                </TiltCard>
+              </motion.div>
             );
           })}
         </div>
