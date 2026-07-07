@@ -1,19 +1,59 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
+const ROTATING_WORDS = ['their mark.', 'different.', 'the scroll.', 'your inbox.'];
 const TAGS = ['Web Design', 'Brand Video', 'Motion Graphics', 'Social Cuts'];
+const LOGOS = ['Northbound', 'Fielder', 'Havenly', 'Marlow & Co', 'Ridgeline'];
 
 export default function Hero() {
   const rootRef = useRef<HTMLDivElement>(null);
   const timecodeRef = useRef<HTMLSpanElement>(null);
+  const wordRef = useRef<HTMLSpanElement>(null);
+  const [wordIndex, setWordIndex] = useState(0);
 
+  // rotating word — flips to the next word on a timer, animated with anime.js
+  useEffect(() => {
+    let cancelled = false;
+    let interval: ReturnType<typeof setInterval>;
+
+    (async () => {
+      const { animate } = await import('animejs');
+      if (cancelled) return;
+
+      interval = setInterval(() => {
+        if (!wordRef.current) return;
+        animate(wordRef.current, {
+          translateY: [0, -14],
+          opacity: [1, 0],
+          duration: 260,
+          ease: 'inQuad',
+          onComplete: () => {
+            setWordIndex((i) => (i + 1) % ROTATING_WORDS.length);
+            if (!wordRef.current) return;
+            animate(wordRef.current, {
+              translateY: [14, 0],
+              opacity: [0, 1],
+              duration: 420,
+              ease: 'outBack',
+            });
+          },
+        });
+      }, 2600);
+    })();
+
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, []);
+
+  // main entrance timeline
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
-      // animejs v4 uses named exports, no default export
       const { createTimeline, stagger, animate } = await import('animejs');
       if (cancelled || !rootRef.current) return;
 
@@ -21,33 +61,28 @@ export default function Hero() {
       const ticks = root.querySelectorAll<HTMLElement>('.tl-tick');
       const words = root.querySelectorAll<HTMLElement>('.tl-word');
       const tags = root.querySelectorAll<HTMLElement>('.tl-tag');
+      const badge = root.querySelector<HTMLElement>('.tl-badge');
+      const logos = root.querySelectorAll<HTMLElement>('.tl-logo');
       const playhead = root.querySelector<HTMLElement>('.tl-playhead');
       const track = root.querySelector<HTMLElement>('.tl-track-fill');
 
       const tl = createTimeline({ defaults: { ease: 'outExpo' } });
 
-      tl.add(ticks, {
-        scaleY: [0, 1],
-        opacity: [0, 1],
-        duration: 500,
-        delay: stagger(18),
-      })
+      tl.add(badge ? [badge] : [], { translateY: [-16, 0], opacity: [0, 1], duration: 500 })
+        .add(ticks, { scaleY: [0, 1], opacity: [0, 1], duration: 500, delay: stagger(16) }, '-=200')
         .add(track ? [track] : [], { width: ['0%', '38%'], duration: 900 }, '-=300')
         .add(
           playhead ? [playhead] : [],
-          { translateX: ['0vw', '38vw'], duration: 900, ease: 'outQuint' },
+          { translateX: ['0vw', '38vw'], duration: 1000, ease: 'outElastic(1, .6)' },
           '-=900'
         )
         .add(
           words,
-          { translateY: [36, 0], opacity: [0, 1], duration: 800, delay: stagger(80) },
-          '-=700'
+          { translateY: [40, 0], opacity: [0, 1], rotate: [2, 0], duration: 800, delay: stagger(90) },
+          '-=750'
         )
-        .add(
-          tags,
-          { translateY: [12, 0], opacity: [0, 1], duration: 500, delay: stagger(90) },
-          '-=400'
-        );
+        .add(tags, { translateY: [14, 0], opacity: [0, 1], duration: 500, delay: stagger(80) }, '-=400')
+        .add(logos, { opacity: [0, 1], duration: 600, delay: stagger(70) }, '-=250');
 
       // frame-accurate timecode counter, ticking up like an export progress readout
       if (timecodeRef.current) {
@@ -68,6 +103,15 @@ export default function Hero() {
           },
         });
       }
+
+      // gentle perpetual float on the tag chips — keeps the hero feeling alive, not static
+      animate('.tl-tag', {
+        translateY: [0, -6, 0],
+        duration: 2600,
+        delay: stagger(300, { start: 1400 }),
+        loop: true,
+        ease: 'inOutSine',
+      });
     })();
 
     return () => {
@@ -83,12 +127,24 @@ export default function Hero() {
     >
       {/* ambient glow */}
       <div className="pointer-events-none absolute -top-40 right-0 h-[32rem] w-[32rem] rounded-full bg-[#FFA649]/10 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[#FFA649]/5 blur-[100px]" />
 
       <div className="relative mx-auto max-w-5xl">
         <div className="mb-8 flex items-center justify-between font-[family-name:var(--font-mono)] text-xs text-[#8FA1AD]">
-          <span>REEL_001 / LAUNCH</span>
+          <span>JAANI_REEL — 001</span>
           <span ref={timecodeRef} className="text-[#FFA649]">
             00:00:00:00
+          </span>
+        </div>
+
+        {/* playful availability badge */}
+        <div className="tl-badge mb-6 opacity-0">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#FFA649]/25 bg-[#FFA649]/5 px-4 py-1.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-wide text-[#FFA649]">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFA649] opacity-50" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#FFA649]" />
+            </span>
+            Say jaani — now booking Q3
           </span>
         </div>
 
@@ -97,27 +153,40 @@ export default function Hero() {
             <span className="tl-word inline-block">Websites and video</span>
           </span>
           <span className="block overflow-hidden pb-1">
-            <span className="tl-word inline-block text-[#FFA649]">that hit their mark.</span>
+            <span className="tl-word inline-block">
+              that hit{' '}
+              <span className="relative inline-block align-top text-[#FFA649]">
+                <span ref={wordRef} className="inline-block">
+                  {ROTATING_WORDS[wordIndex]}
+                </span>
+              </span>
+            </span>
           </span>
         </h1>
 
         <p className="tl-word mt-8 max-w-xl text-lg text-[#C9D3D9]">
-          Cutline is a design and motion studio for brands who need a site that converts and
-          footage that stops the scroll — cut on the same timeline, shipped on one deadline.
+          Jaani Studio designs sites and cuts video for brands who&rsquo;d rather be remembered
+          than ignored. One crew, one timeline, zero boring PDFs of &ldquo;brand guidelines.&rdquo;
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
           <Link
             href="#contact"
-            className="tl-word rounded-full bg-[#FFA649] px-7 py-3.5 text-sm font-semibold text-[#1B262E] transition-transform hover:scale-[1.03] active:scale-[0.98]"
+            className="tl-word group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-[#FFA649] px-7 py-3.5 text-sm font-semibold text-[#1B262E] transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.05] hover:shadow-[0_10px_30px_-6px_rgba(255,166,73,0.65)] active:scale-[0.95]"
           >
             Start your project
+            <span className="transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1">
+              →
+            </span>
           </Link>
           <Link
             href="#work"
-            className="tl-word rounded-full border border-[#FFA649]/30 px-7 py-3.5 text-sm font-semibold text-[#F3ECE0] transition-colors hover:border-[#FFA649] hover:text-[#FFA649]"
+            className="tl-word group inline-flex items-center gap-2 rounded-full border border-[#FFA649]/30 px-7 py-3.5 text-sm font-semibold text-[#F3ECE0] transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.05] hover:border-[#FFA649] hover:text-[#FFA649] active:scale-[0.95]"
           >
             See our work
+            <span className="transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1">
+              ↳
+            </span>
           </Link>
         </div>
 
@@ -146,6 +215,23 @@ export default function Hero() {
               {tag}
             </span>
           ))}
+        </div>
+
+        {/* trust strip */}
+        <div className="mt-16 border-t border-[#FFA649]/10 pt-8">
+          <p className="mb-4 text-xs text-[#8FA1AD]">
+            Trusted by teams who used to have fourteen unread Slack messages from their old agency
+          </p>
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+            {LOGOS.map((logo) => (
+              <span
+                key={logo}
+                className="tl-logo font-[family-name:var(--font-display)] text-sm font-semibold text-[#F3ECE0]/40 opacity-0 transition-colors duration-300 hover:text-[#F3ECE0]/80"
+              >
+                {logo}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
