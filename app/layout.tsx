@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google';
+import CursorGlow from './components/CursorGlow';
 
 export const metadata: Metadata = {
   title: "JaaniStudio",
@@ -14,7 +15,10 @@ const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${plexMono.variable}`}>
-      <body className="bg-[#283845] font-sans">{children}</body>
+      <body className="bg-[#283845] font-sans">
+        <CursorGlow />
+        {children}
+      </body>
     </html>
   );
 }
