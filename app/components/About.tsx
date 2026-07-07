@@ -29,39 +29,47 @@ export default function About() {
         <div className="grid gap-16 md:grid-cols-[1.3fr_1fr]">
           <div>
             <h2 className="font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl">
-              We started as two freelancers arguing over the same export settings.
+              We started as two freelancers arguing over the same export settings, three energy
+              drinks deep.
             </h2>
             <p className="mt-6 max-w-lg text-[#C9D3D9]">
-              Now Cutline builds the site and cuts the footage for the same brands, on the same
-              timeline. No handoff between &ldquo;the web team&rdquo; and &ldquo;the video
+              Now Jaani Studio builds the site and cuts the footage for the same brands, on the
+              same timeline. No handoff between &ldquo;the web team&rdquo; and &ldquo;the video
               team&rdquo; — one crew, one brief, one deadline. That&rsquo;s the whole pitch.
             </p>
             <p className="mt-4 max-w-lg text-[#C9D3D9]">
               We keep the client roster small on purpose. Fewer projects, more frames reviewed,
-              fewer things that ship half-finished.
+              fewer things that ship half-finished — and yes, we will tell you if your idea needs
+              work before your competitors do.
             </p>
           </div>
 
           <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[#FFA649]/10 bg-[#FFA649]/5 sm:grid-cols-1">
             {META.map((item) => (
-              <div key={item.label} className="bg-[#283845] px-6 py-5">
+              <div
+                key={item.label}
+                className="group bg-[#283845] px-6 py-5 transition-colors duration-300 hover:bg-[#2f4150]"
+              >
                 <dt className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-widest text-[#8FA1AD]">
                   {item.label}
                 </dt>
-                <dd className="mt-1 text-lg font-semibold text-[#F3ECE0]">{item.value}</dd>
+                <dd className="mt-1 text-lg font-semibold text-[#F3ECE0] transition-colors duration-300 group-hover:text-[#FFA649]">
+                  {item.value}
+                </dd>
               </div>
             ))}
           </dl>
         </div>
       </div>
 
-      {/* tools marquee — requires the @keyframes marquee snippet in globals.css, see setup notes */}
-      <div className="relative mt-20 overflow-hidden border-y border-[#FFA649]/10 py-5">
-        <div className="flex w-max animate-[marquee_28s_linear_infinite] gap-12">
+      {/* tools marquee — pauses on hover so people can actually read it, requires the
+          @keyframes marquee snippet in globals.css, see setup notes */}
+      <div className="group relative mt-20 overflow-hidden border-y border-[#FFA649]/10 py-5">
+        <div className="flex w-max animate-[marquee_28s_linear_infinite] gap-12 group-hover:[animation-play-state:paused]">
           {[...TOOLS, ...TOOLS].map((tool, i) => (
             <span
               key={i}
-              className="font-[family-name:var(--font-mono)] text-sm uppercase tracking-wide text-[#8FA1AD]/70"
+              className="font-[family-name:var(--font-mono)] text-sm uppercase tracking-wide text-[#8FA1AD]/70 transition-colors duration-300 hover:text-[#FFA649]"
             >
               {tool}
             </span>
