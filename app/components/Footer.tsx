@@ -23,7 +23,7 @@ export default function Footer() {
           {Array.from({ length: 6 }).map((_, i) => (
             <span
               key={i}
-              className="flex items-center gap-8 font-[family-name:var(--font-display)] text-2xl font-semibold text-[#F3ECE0]/30 sm:text-3xl"
+              className="flex items-center gap-8 font-[--font-display] text-2xl font-semibold text-[#F3ECE0]/30 sm:text-3xl"
             >
               Say jaani, let&rsquo;s make something
               <span className="text-[#FFA649]/50">✦</span>
@@ -34,7 +34,7 @@ export default function Footer() {
 
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col justify-between gap-10 border-b border-[#FFA649]/10 pb-16 md:flex-row md:items-end">
-          <h2 className="max-w-xl font-[family-name:var(--font-display)] text-4xl leading-[1.05] text-[#F3ECE0] sm:text-5xl md:text-6xl">
+          <h2 className="max-w-xl font-[--font-display] text-4xl leading-[1.05] text-[#F3ECE0] sm:text-5xl md:text-6xl">
             Let&rsquo;s cut something <span className="text-[#FFA649]">worth watching.</span>
           </h2>
           <Link
@@ -50,7 +50,7 @@ export default function Footer() {
 
         <div className="grid gap-10 py-14 sm:grid-cols-3">
           <div>
-            <span className="font-[family-name:var(--font-display)] text-lg font-bold text-[#F3ECE0]">
+            <span className="font-[--font-display] text-lg font-bold text-[#F3ECE0]">
               JAANI<span className="text-[#FFA649]">.studio</span>
             </span>
             <p className="mt-3 max-w-[24ch] text-sm text-[#8FA1AD]">
@@ -91,7 +91,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 pt-8 font-[family-name:var(--font-mono)] text-xs text-[#8FA1AD] sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 pt-8 font-mono text-xs text-[#8FA1AD] sm:flex-row">
           <span>© {new Date().getFullYear()} Jaani Studio. All rights reserved.</span>
           <Link
             href="#top"
