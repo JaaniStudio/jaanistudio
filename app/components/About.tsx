@@ -60,7 +60,7 @@ export default function About() {
     <section id="about" className="relative bg-[#283845] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
         <motion.div
-          className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+          className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
           initial={{ y: 20, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -73,7 +73,7 @@ export default function About() {
         <div className="grid gap-16 md:grid-cols-[1.3fr_1fr]">
           <div>
             <motion.h2
-              className="font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+              className="font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
               initial={{ y: 40, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
