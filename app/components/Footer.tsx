@@ -53,8 +53,12 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#283845] px-6 pb-8 pt-20 md:pt-28" ref={sectionRef}>
       <div className="mb-16 overflow-hidden border-y border-[#FFA649]/10 py-4">
-        <div className="flex w-max animate-[marquee_18s_linear_infinite] gap-8">
-          {Array.from({ length: 6 }).map((_, i) => (
+        <motion.div
+          className="flex w-max gap-8"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
+        >
+          {Array.from({ length: 12 }).map((_, i) => (
             <span
               key={i}
               className="flex items-center gap-8 font-[--font-display] text-2xl font-semibold text-[#F3ECE0]/30 transition-all duration-300 hover:text-[#F3ECE0]/50 sm:text-3xl"
@@ -65,7 +69,7 @@ export default function Footer() {
               </span>
             </span>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <div className="mx-auto max-w-6xl">
