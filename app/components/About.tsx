@@ -129,7 +129,11 @@ export default function About() {
       </div>
 
       <div ref={marqueeRef} className="group relative mt-20 overflow-hidden border-y border-[#FFA649]/10 py-5">
-        <div className="flex w-max animate-[marquee_28s_linear_infinite] gap-12 group-hover:[animation-play-state:paused]">
+        <motion.div
+          className="flex w-max gap-12"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
+        >
           {[...TOOLS, ...TOOLS].map((tool, i) => (
             <span
               key={i}
@@ -138,7 +142,7 @@ export default function About() {
               {tool}
             </span>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
