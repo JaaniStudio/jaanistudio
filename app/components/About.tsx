@@ -135,7 +135,7 @@ export default function About() {
                 variants={staggerItem}
                 className="group bg-[#283845] px-6 py-5 transition-all duration-300 hover:bg-[#2f4150] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
               >
-                <dt className="font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-widest text-[#8FA1AD]">
+                <dt className="font-mono text-[11px] uppercase tracking-widest text-[#8FA1AD]">
                   {item.label}
                 </dt>
                 <dd className="mt-1 text-lg font-semibold text-[#F3ECE0] transition-all duration-300 group-hover:text-[#FFA649] group-hover:translate-x-1">
@@ -155,7 +155,7 @@ export default function About() {
           {[...TOOLS, ...TOOLS].map((tool, i) => (
             <span
               key={i}
-              className="marquee-item font-[family-name:var(--font-mono)] text-sm uppercase tracking-wide text-[#8FA1AD]/70 transition-all duration-300 hover:text-[#FFA649] hover:scale-110"
+              className="marquee-item font-mono text-sm uppercase tracking-wide text-[#8FA1AD]/70 transition-all duration-300 hover:text-[#FFA649] hover:scale-110"
             >
               {tool}
             </span>

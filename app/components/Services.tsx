@@ -60,7 +60,7 @@ export default function Services() {
     <section id="services" className="relative bg-[#1B262E] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
         <motion.div
-          className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+          className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
           initial={{ y: 20, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -71,7 +71,7 @@ export default function Services() {
         </motion.div>
 
         <motion.h2
-          className="max-w-2xl font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+          className="max-w-2xl font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
           initial={{ y: 30, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
@@ -93,7 +93,7 @@ export default function Services() {
                 <TiltCard tiltDegree={4} glare={true} className="h-full">
                   <div className="group relative bg-[#1B262E] p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#283845] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10">
                     <div className="mb-6 flex items-center justify-between">
-                      <span className="rounded border border-[#FFA649]/30 px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] text-[#FFA649]">
+                      <span className="rounded border border-[#FFA649]/30 px-2 py-1 font-mono text-[11px] text-[#FFA649]">
                         TRACK / {service.track}
                       </span>
                       <motion.div
@@ -106,7 +106,7 @@ export default function Services() {
                         />
                       </motion.div>
                     </div>
-                    <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[#F3ECE0] sm:text-2xl">
+                    <h3 className="font-[--font-display] text-xl font-semibold text-[#F3ECE0] sm:text-2xl">
                       {service.title}
                     </h3>
                     <p className="mt-3 text-[#C9D3D9]">{service.description}</p>
