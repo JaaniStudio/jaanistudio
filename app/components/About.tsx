@@ -38,6 +38,7 @@ export default function About() {
   const metaInView = useInView(metaRef, { once: true, margin: '-60px' });
 
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -54,6 +55,24 @@ export default function About() {
       });
     })();
     return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let rafId: number;
+    let start: number | null = null;
+    const duration = 28000;
+
+    const tick = (ts: number) => {
+      if (!start) start = ts;
+      const progress = ((ts - start) % duration) / duration;
+      el.style.transform = `translateX(${-progress * 50}%)`;
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   return (
@@ -129,10 +148,9 @@ export default function About() {
       </div>
 
       <div ref={marqueeRef} className="group relative mt-20 overflow-hidden border-y border-[#FFA649]/10 py-5">
-        <motion.div
+        <div
+          ref={trackRef}
           className="flex w-max gap-12"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 28, ease: 'linear', repeat: Infinity }}
         >
           {[...TOOLS, ...TOOLS].map((tool, i) => (
             <span
@@ -142,7 +160,7 @@ export default function About() {
               {tool}
             </span>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

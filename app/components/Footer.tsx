@@ -33,6 +33,7 @@ export default function Footer() {
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' });
 
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -50,13 +51,30 @@ export default function Footer() {
     return () => { cancelled = true; };
   }, []);
 
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let rafId: number;
+    let start: number | null = null;
+    const duration = 18000;
+
+    const tick = (ts: number) => {
+      if (!start) start = ts;
+      const progress = ((ts - start) % duration) / duration;
+      el.style.transform = `translateX(${-progress * 50}%)`;
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
+
   return (
     <footer className="relative overflow-hidden bg-[#283845] px-6 pb-8 pt-20 md:pt-28" ref={sectionRef}>
       <div className="mb-16 overflow-hidden border-y border-[#FFA649]/10 py-4">
-        <motion.div
+        <div
+          ref={trackRef}
           className="flex w-max gap-8"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
         >
           {Array.from({ length: 12 }).map((_, i) => (
             <span
@@ -69,7 +87,7 @@ export default function Footer() {
               </span>
             </span>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <div className="mx-auto max-w-6xl">

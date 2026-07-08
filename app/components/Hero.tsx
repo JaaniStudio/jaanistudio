@@ -48,6 +48,7 @@ export default function Hero() {
   const wordRef = useRef<HTMLSpanElement>(null);
   const [wordIndex, setWordIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const marqueeRef = useRef<HTMLDivElement>(null);
 
   // mouse parallax — drives the spotlight drift and the character's subtle tilt
   const mouseX = useMotionValue(0);
@@ -185,6 +186,25 @@ export default function Hero() {
 
     return () => { cancelled = true; };
   }, [mounted]);
+
+  // logo marquee — rAF loop, never stops
+  useEffect(() => {
+    const el = marqueeRef.current;
+    if (!el) return;
+    let rafId: number;
+    let start: number | null = null;
+    const duration = 24000;
+
+    const tick = (ts: number) => {
+      if (!start) start = ts;
+      const progress = ((ts - start) % duration) / duration;
+      el.style.transform = `translateX(${-progress * 50}%)`;
+      rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
 
   return (
     <section
@@ -427,10 +447,9 @@ export default function Hero() {
           <p className="mb-4 text-xs text-[#8FA1AD]">
             Trusted by teams who used to have fourteen unread Slack messages from their old agency
           </p>
-          <motion.div
+          <div
+            ref={marqueeRef}
             className="flex w-max items-center gap-12"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 24, ease: 'linear', repeat: Infinity }}
           >
             {[...LOGOS, ...LOGOS].map((logo, i) => (
               <span
@@ -440,7 +459,7 @@ export default function Hero() {
                 {logo}
               </span>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
     </section>
