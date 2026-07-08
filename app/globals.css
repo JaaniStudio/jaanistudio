@@ -11,6 +11,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html,
+body {
+  cursor: url("/cursor.png") 16 16, auto;
+}
+
+a:hover,
+button:hover,
+input:hover,
+textarea:hover,
+select:hover,
+[role="button"]:hover {
+  cursor: url("/selection.png") 8 8, pointer !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
