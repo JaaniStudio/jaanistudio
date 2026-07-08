@@ -38,7 +38,7 @@ export default function Navbar() {
         scrolled ? 'border-b border-[#FFA649]/10 bg-[#283845]/90 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <div className="h-[2px] w-full bg-[#FFA649]/10">
+      <div className="h-0.5 w-full bg-[#FFA649]/10">
         <motion.div
           className="h-full bg-[#FFA649]"
           style={{ width: `${progress}%` }}
@@ -56,7 +56,7 @@ export default function Navbar() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFA649] opacity-40" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#FFA649]" />
           </motion.span>
-          <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-[#F3ECE0]">
+          <span className="font-[--font-display] text-lg font-bold tracking-tight text-[#F3ECE0]">
             JAANI
             <span className="text-[#FFA649]">.studio</span>
           </span>
@@ -66,7 +66,7 @@ export default function Navbar() {
           {NAV_LINKS.map((link, i) => (
             <Link key={link.href} href={link.href} className="group flex items-center gap-2 text-sm text-[#C9D3D9]">
               <motion.span
-                className="font-[family-name:var(--font-mono)] text-[11px] text-[#FFA649]/50"
+                className="font-mono text-[11px] text-[#FFA649]/50"
                 whileHover={{ color: 'rgba(255,166,73,1)' }}
               >
                 0{i + 1}
@@ -160,7 +160,7 @@ export default function Navbar() {
                         onClick={() => setMenuOpen(false)}
                         className="flex items-center gap-3 text-base text-[#C9D3D9] transition-colors hover:text-[#FFA649]"
                       >
-                        <span className="font-[family-name:var(--font-mono)] text-xs text-[#FFA649]/60">
+                        <span className="font-mono text-xs text-[#FFA649]/60">
                           0{i + 1}
                         </span>
                         {link.label}

@@ -109,7 +109,7 @@ export default function Portfolio() {
         <div className="sticky top-0 flex h-screen flex-col overflow-hidden bg-[#283845]">
           <div className="mx-auto w-full max-w-6xl shrink-0 px-6 pt-24 md:pt-28">
             <motion.div
-              className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+              className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
               initial={{ y: 20, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -121,7 +121,7 @@ export default function Portfolio() {
 
             <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <motion.h2
-                className="max-w-lg font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+                className="max-w-lg font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
                 initial={{ y: 30, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
@@ -170,7 +170,7 @@ export default function Portfolio() {
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0.9, opacity: 0 }}
                       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="aspect-[4/3] w-[78vw] shrink-0 snap-start sm:w-[42vw] md:w-[30vw] lg:w-[26vw]"
+                      className="aspect-4/3 w-[78vw] shrink-0 snap-start sm:w-[42vw] md:w-[30vw] lg:w-[26vw]"
                     >
                       <TiltCard tiltDegree={3} glare className="h-full">
                         <a
@@ -186,12 +186,12 @@ export default function Portfolio() {
                                 <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
                               </div>
                               <div
-                                className={`relative flex-1 bg-gradient-to-br ${project.gradient} transition-all duration-700 group-hover:scale-105`}
+                                className={`relative flex-1 bg-linear-to-br ${project.gradient} transition-all duration-700 group-hover:scale-105`}
                               />
                             </div>
                           ) : (
                             <div
-                              className={`absolute inset-0 bg-gradient-to-br ${project.gradient} transition-all duration-700 group-hover:scale-105`}
+                              className={`absolute inset-0 bg-linear-to-br ${project.gradient} transition-all duration-700 group-hover:scale-105`}
                             >
                               <div className="absolute inset-0 flex items-center justify-center">
                                 <motion.span
@@ -206,15 +206,15 @@ export default function Portfolio() {
 
                           <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-6">
                             <div className="flex items-center justify-between">
-                              <span className="w-fit rounded bg-[#1B262E]/70 px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] text-[#FFA649] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/20">
+                              <span className="w-fit rounded bg-[#1B262E]/70 px-2 py-1 font-mono text-[11px] text-[#FFA649] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/20">
                                 {project.reel}
                               </span>
-                              <span className="rounded bg-[#1B262E]/70 px-2 py-1 font-[family-name:var(--font-mono)] text-[11px] text-[#8FA1AD] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/10 group-hover:text-[#FFA649]">
+                              <span className="rounded bg-[#1B262E]/70 px-2 py-1 font-mono text-[11px] text-[#8FA1AD] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/10 group-hover:text-[#FFA649]">
                                 {project.meta}
                               </span>
                             </div>
                             <div>
-                              <motion.h3 className="flex items-center gap-1.5 font-[family-name:var(--font-display)] text-xl font-semibold text-[#F3ECE0] transition-all duration-300 group-hover:translate-x-1">
+                              <motion.h3 className="flex items-center gap-1.5 font-[--font-display] text-xl font-semibold text-[#F3ECE0] transition-all duration-300 group-hover:translate-x-1">
                                 {project.name}
                                 {project.type === 'web' && (
                                   <ArrowUpRight className="h-4 w-4 text-[#FFA649] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

@@ -261,7 +261,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={childVariants} className="mb-8 flex items-center justify-between font-[family-name:var(--font-mono)] text-xs text-[#8FA1AD]">
+        <motion.div variants={childVariants} className="mb-8 flex items-center justify-between font-mono text-xs text-[#8FA1AD]">
           <span>JAANI_REEL — 001</span>
           <span ref={timecodeRef} className="text-[#FFA649]">
             00:00:00:00
@@ -269,7 +269,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={childVariants} className="mb-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#FFA649]/25 bg-[#FFA649]/5 px-4 py-1.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-wide text-[#FFA649]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#FFA649]/25 bg-[#FFA649]/5 px-4 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[#FFA649]">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFA649] opacity-50" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#FFA649]" />
@@ -278,7 +278,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="font-[family-name:var(--font-display)] text-5xl leading-[0.95] tracking-tight text-[#F3ECE0] sm:text-6xl md:text-7xl lg:text-[4.5rem]">
+        <h1 className="font-[--font-display] text-5xl leading-[0.95] tracking-tight text-[#F3ECE0] sm:text-6xl md:text-7xl lg:text-[4.5rem]">
           <span className="block overflow-hidden pb-1">
             <span className="inline-block">
               {HEADLINE_LINE_1.split('').map((ch, i) => (
@@ -325,11 +325,11 @@ export default function Hero() {
 
         <motion.div
           variants={childVariants}
-          className="relative mx-auto max-md:mt-10 h-[260px] w-full max-w-2xl [perspective:1200px]] md:h-[300px]"
+          className="relative mx-auto max-md:mt-10 h-65 w-full max-w-2xl [perspective:1200px]] md:h-75"
         >
           {/* theatrical beam falling onto the character */}
           <div
-            className="pointer-events-none absolute left-1/2 top-[-40px] h-[220px] w-[170px] -translate-x-1/2"
+            className="pointer-events-none absolute left-1/2 -top-10 h-55 w-42.5 -translate-x-1/2"
             style={{
               background: 'linear-gradient(to bottom, rgba(255,166,73,0.30), rgba(255,166,73,0))',
               clipPath: 'polygon(44% 0%, 56% 0%, 100% 100%, 0% 100%)',
@@ -339,7 +339,7 @@ export default function Hero() {
 
           {/* soft radial glow, brightest at the base, fading upward — drifts gently with the cursor */}
           <motion.div
-            className="pointer-events-none absolute left-1/2 bottom-0 h-[230px] w-full max-w-2xl -translate-x-1/2"
+            className="pointer-events-none absolute left-1/2 bottom-0 h-57.5 w-full max-w-2xl -translate-x-1/2"
             style={{
               background:
                 'radial-gradient(ellipse 55% 70% at 50% 85%, rgba(255,166,73,0.38) 0%, rgba(255,166,73,0.16) 40%, transparent 72%)',
@@ -351,7 +351,7 @@ export default function Hero() {
 
           {/* brighter core */}
           <motion.div
-            className="pointer-events-none absolute left-1/2 bottom-0 h-[230px] w-full max-w-2xl -translate-x-1/2"
+            className="pointer-events-none absolute left-1/2 bottom-0 h-57.5 w-full max-w-2xl -translate-x-1/2"
             style={{
               background:
                 'radial-gradient(ellipse 22% 30% at 50% 92%, rgba(255,166,73,0.55) 0%, transparent 70%)',
@@ -403,7 +403,7 @@ export default function Hero() {
               transition={{ duration: 0.9, ease: 'easeOut', delay: 1.2 }}
             />
             <motion.div
-              className="absolute -top-[7px] left-0 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-[#FFA649] bg-[#283845]"
+              className="absolute -top-1.75 left-0 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-[#FFA649] bg-[#283845]"
               initial={{ x: '0vw' }}
               animate={{ x: '38vw' }}
               transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 1.2 }}
@@ -429,7 +429,7 @@ export default function Hero() {
           {TAGS.map((tag) => (
             <span
               key={tag}
-              className="tl-tag rounded-full border border-[#8FA1AD]/20 px-4 py-1.5 font-[family-name:var(--font-mono)] text-[11px] uppercase tracking-wide text-[#8FA1AD]"
+              className="tl-tag rounded-full border border-[#8FA1AD]/20 px-4 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[#8FA1AD]"
             >
               {tag}
             </span>
@@ -454,7 +454,7 @@ export default function Hero() {
             {[...LOGOS, ...LOGOS].map((logo, i) => (
               <span
                 key={`${logo}-${i}`}
-                className="whitespace-nowrap font-[family-name:var(--font-display)] text-sm font-semibold text-[#F3ECE0]/40 transition-colors duration-300 hover:text-[#F3ECE0]/80"
+                className="whitespace-nowrap font-[--font-display] text-sm font-semibold text-[#F3ECE0]/40 transition-colors duration-300 hover:text-[#F3ECE0]/80"
               >
                 {logo}
               </span>

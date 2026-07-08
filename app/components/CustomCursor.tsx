@@ -45,7 +45,7 @@ export default function CustomCursor() {
   return (
     <>
       <motion.div
-        className="pointer-events-none fixed z-[9999] hidden md:block"
+        className="pointer-events-none fixed z-9999 hidden md:block"
         style={{
           x: springX,
           y: springY,
@@ -66,7 +66,7 @@ export default function CustomCursor() {
         />
       </motion.div>
       <motion.div
-        className="pointer-events-none fixed z-[9998] hidden md:block"
+        className="pointer-events-none fixed z-9998 hidden md:block"
         style={{
           x: cursorX,
           y: cursorY,

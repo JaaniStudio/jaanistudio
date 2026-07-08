@@ -30,7 +30,7 @@ export default function Contact() {
     <section id="contact" className="relative bg-[#1B262E] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="mx-auto max-w-6xl">
         <motion.div
-          className="mb-14 flex items-center gap-4 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+          className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
           initial={{ y: 20, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -43,7 +43,7 @@ export default function Contact() {
         <div className="grid gap-16 md:grid-cols-[1fr_1.1fr]">
           <div>
             <motion.h2
-              className="font-[family-name:var(--font-display)] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+              className="font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
               initial={{ y: 30, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
@@ -62,7 +62,7 @@ export default function Contact() {
             </motion.p>
 
             <motion.div
-              className="mt-10 space-y-4 font-[family-name:var(--font-mono)] text-sm"
+              className="mt-10 space-y-4 font-mono text-sm"
               initial={{ y: 20, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
@@ -98,10 +98,10 @@ export default function Contact() {
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex h-full min-h-[320px] flex-col items-center justify-center text-center"
+                  className="flex h-full min-h-80 flex-col items-center justify-center text-center"
                 >
                   <motion.span
-                    className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-xs uppercase tracking-widest text-[#FFA649]"
+                    className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.1 }}
@@ -116,7 +116,7 @@ export default function Contact() {
                     </motion.span>
                     {' '}Sent
                   </motion.span>
-                  <h3 className="mt-3 font-[family-name:var(--font-display)] text-2xl text-[#F3ECE0]">
+                  <h3 className="mt-3 font-[--font-display] text-2xl text-[#F3ECE0]">
                     Say less, jaani.
                   </h3>
                   <p className="mt-2 max-w-xs text-sm text-[#C9D3D9]">
