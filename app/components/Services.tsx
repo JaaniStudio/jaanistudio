@@ -57,7 +57,11 @@ export default function Services() {
   const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="services" className="relative bg-[#1B262E] px-6 py-24 md:py-32" ref={sectionRef}>
+    <section id="services" className="relative overflow-hidden bg-[#1B262E] px-6 py-24 md:py-32" ref={sectionRef}>
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -right-32 top-1/3 h-80 w-80 rounded-full opacity-50" style={{ background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)', filter: 'blur(35px)' }} />
+        <div className="absolute -left-32 -bottom-16 h-96 w-96 rounded-full opacity-60" style={{ background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+      </div>
       <div className="mx-auto max-w-6xl">
         <motion.div
           className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
