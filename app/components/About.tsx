@@ -76,7 +76,11 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="relative bg-[#283845] px-6 py-24 md:py-32" ref={sectionRef}>
+    <section id="about" className="relative overflow-hidden bg-[#283845] px-6 py-24 md:py-32" ref={sectionRef}>
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-60" style={{ background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full opacity-50" style={{ background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)', filter: 'blur(35px)' }} />
+      </div>
       <div className="mx-auto max-w-6xl">
         <motion.div
           className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"

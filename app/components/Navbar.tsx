@@ -37,6 +37,7 @@ export default function Navbar() {
       className={`fixed left-0 right-0 top-0 z-50 transition-colors duration-500 ${
         scrolled ? 'border-b border-[#FFA649]/10 bg-[#283845]/90 backdrop-blur-md' : 'bg-transparent'
       }`}
+      style={{ isolation: 'isolate' }}
     >
       <div className="h-0.5 w-full bg-[#FFA649]/10">
         <motion.div

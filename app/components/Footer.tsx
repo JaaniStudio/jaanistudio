@@ -71,6 +71,10 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-[#283845] px-6 pb-8 pt-20 md:pt-28" ref={sectionRef}>
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-60" style={{ background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)', filter: 'blur(35px)' }} />
+        <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full opacity-50" style={{ background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)', filter: 'blur(30px)' }} />
+      </div>
       <div className="mb-16 overflow-hidden border-y border-[#FFA649]/10 py-4">
         <div
           ref={trackRef}
