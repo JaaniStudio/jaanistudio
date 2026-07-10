@@ -101,7 +101,7 @@ export default function Navbar() {
                   'radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.2), transparent 50%)',
               }}
             />
-            <span className="relative z-10">Start a project</span>
+            <span className="relative z-10">Start a project which?</span>
           </Link>
         </div>
 
