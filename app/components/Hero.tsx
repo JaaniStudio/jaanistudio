@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, startTransition } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence, useAnimationControls } from 'framer-motion';
 import MagneticButton from './MagneticButton';
 import Image from 'next/image';
 
@@ -49,6 +49,11 @@ export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const [logoMarqueeHover, setLogoMarqueeHover] = useState(false);
+  const logoMarqueeHoverRef = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [charInteracted, setCharInteracted] = useState(false);
+  const charControls = useAnimationControls();
 
   // mouse parallax — drives the spotlight drift and the character's subtle tilt
   const mouseX = useMotionValue(0);
@@ -59,6 +64,10 @@ export default function Hero() {
   const glowY = useTransform(springY, [-1, 1], [-12, 12]);
   const charRotateY = useTransform(springX, [-1, 1], [-7, 7]);
   const charRotateX = useTransform(springY, [-1, 1], [6, -6]);
+  const charPullX = useTransform(springX, [-1, 1], [-16, 16]);
+
+  const { scrollY } = useScroll();
+  const scrollCueOpacity = useTransform(scrollY, [0, 220], [1, 0]);
 
   const handlePointerMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -76,6 +85,27 @@ export default function Hero() {
   useEffect(() => {
     startTransition(() => setMounted(true));
   }, []);
+
+  // character entrance — same reveal as before, just driven through controls so
+  // it can share the same transform pipeline as the drag/tap reactions
+  useEffect(() => {
+    if (!mounted) return;
+    charControls.start({
+      opacity: 1,
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: { duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.9 },
+    });
+  }, [mounted, charControls]);
+
+  async function handleCharacterTap() {
+    setCharInteracted(true);
+    await charControls.start({
+      scale: [1, 0.85, 1.1, 0.96, 1],
+      rotate: [0, -8, 6, -3, 0],
+      transition: { duration: 0.6, ease: 'easeInOut' },
+    });
+  }
 
   // rotating last word
   useEffect(() => {
@@ -187,17 +217,28 @@ export default function Hero() {
     return () => { cancelled = true; };
   }, [mounted]);
 
-  // logo marquee — rAF loop, never stops
+  useEffect(() => {
+    logoMarqueeHoverRef.current = logoMarqueeHover;
+  }, [logoMarqueeHover]);
+
+  // logo marquee — rAF loop, pauses on hover
   useEffect(() => {
     const el = marqueeRef.current;
     if (!el) return;
     let rafId: number;
     let start: number | null = null;
+    let pausedAt = 0;
     const duration = 24000;
 
     const tick = (ts: number) => {
       if (!start) start = ts;
-      const progress = ((ts - start) % duration) / duration;
+      if (logoMarqueeHoverRef.current) {
+        start = ts - pausedAt;
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+      pausedAt = ts - start;
+      const progress = (pausedAt % duration) / duration;
       el.style.transform = `translateX(${-progress * 50}%)`;
       rafId = requestAnimationFrame(tick);
     };
@@ -215,12 +256,14 @@ export default function Hero() {
       className="relative overflow-hidden bg-[#283845] px-6 pb-24 pt-24 md:pb-32 md:pt-24"
     >
       {/* ambient top wash for depth */}
-      <div
+      <motion.div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
             'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,166,73,0.10) 0%, transparent 60%)',
         }}
+        animate={{ opacity: [0.75, 1, 0.75] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* vignette */}
@@ -256,7 +299,7 @@ export default function Hero() {
       />
 
       <motion.div
-        className="relative z-10 mx-auto max-w-5xl"
+        className="relative z-10 mx-auto max-w-6xl"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -268,8 +311,10 @@ export default function Hero() {
           </span>
         </motion.div>
 
+        <div className="grid grid-cols-1 items-center gap-y-10 lg:grid-cols-2 lg:items-center lg:gap-x-14">
+        <div>
         <motion.div variants={childVariants} className="mb-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#FFA649]/25 bg-[#FFA649]/5 px-4 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[#FFA649]">
+          <span className="group inline-flex items-center gap-2 rounded-full border border-[#FFA649]/25 bg-[#FFA649]/5 px-4 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[#FFA649] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#FFA649]/45 hover:bg-[#FFA649]/10 hover:shadow-[0_8px_24px_-10px_rgba(255,166,73,0.5)]">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFA649] opacity-50" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#FFA649]" />
@@ -322,10 +367,12 @@ export default function Hero() {
             See our work
           </MagneticButton>
         </motion.div>
+        </div>
 
         <motion.div
+          ref={stageRef}
           variants={childVariants}
-          className="relative mx-auto max-md:mt-10 h-65 w-full max-w-2xl [perspective:1200px]] md:h-75"
+          className="relative mx-auto h-65 w-full max-w-2xl [perspective:1200px]] md:h-75"
         >
           {/* theatrical beam falling onto the character */}
           <div
@@ -361,19 +408,36 @@ export default function Hero() {
             }}
           />
 
-          {/* grounding shadow beneath the character */}
-          <div
+          {/* grounding shadow beneath the character — breathes opposite the float */}
+          <motion.div
             className="pointer-events-none absolute left-1/2 bottom-3 h-6 w-40 -translate-x-1/2 rounded-full"
             style={{
               background: 'radial-gradient(ellipse, rgba(0,0,0,0.45) 0%, transparent 75%)',
               filter: 'blur(4px)',
             }}
+            animate={{ scaleX: [1, 0.82, 1], opacity: [0.9, 0.6, 0.9] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
           />
 
-          {/* character — subtle idle float plus cursor-driven tilt */}
+          {/* discoverability hint — fades once the person drags or taps the character */}
+          <AnimatePresence>
+            {!charInteracted && (
+              <motion.span
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4, transition: { duration: 0.3 } }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 2.4 }}
+                className="pointer-events-none absolute right-2 top-0 z-10 whitespace-nowrap rounded-full border border-[#FFA649]/20 bg-[#1B262E]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#8FA1AD] backdrop-blur"
+              >
+                ↔ drag me
+              </motion.span>
+            )}
+          </AnimatePresence>
+
+          {/* character — idle float, cursor magnetism/tilt, and a draggable, tappable reaction layer */}
           <div className="relative flex h-full items-end justify-center pb-6">
             <motion.div
-              style={{ rotateX: charRotateX, rotateY: charRotateY }}
+              style={{ rotateX: charRotateX, rotateY: charRotateY, x: charPullX }}
               animate={{ y: [0, -10, 0] }}
               transition={{
                 duration: 4.5,
@@ -384,15 +448,34 @@ export default function Hero() {
               className="flex items-center justify-center rounded-2xl"
             >
               <motion.div
+                drag
+                dragConstraints={stageRef}
+                dragElastic={0.15}
+                dragSnapToOrigin
+                dragTransition={{ bounceStiffness: 320, bounceDamping: 22 }}
+                onDragStart={() => setCharInteracted(true)}
+                onTap={handleCharacterTap}
+                whileHover={{ scale: 1.03 }}
+                whileDrag={{ scale: 1.08, rotate: 3 }}
+                whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, scale: 0.88, filter: 'blur(14px)' }}
-                animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
+                animate={charControls}
+                className="cursor-grab touch-none active:cursor-grabbing"
               >
-                <Image src={'/char.png'} alt="Main character" width={350} height={350} priority />
+                <Image
+                  src={'/char.png'}
+                  className='grab'
+                  alt="Main character — drag or tap to say hi"
+                  width={350}
+                  height={350}
+                  priority
+                  draggable={false}
+                />
               </motion.div>
             </motion.div>
           </div>
         </motion.div>
+        </div>
 
         <div className="relative mt-20">
           <div className="relative h-px w-full bg-[#FFA649]/15">
@@ -403,11 +486,18 @@ export default function Hero() {
               transition={{ duration: 0.9, ease: 'easeOut', delay: 1.2 }}
             />
             <motion.div
-              className="absolute -top-1.75 left-0 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-[#FFA649] bg-[#283845]"
+              className="absolute -top-1.75 left-0 h-4 w-4 -translate-x-1/2"
               initial={{ x: '0vw' }}
               animate={{ x: '38vw' }}
               transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1], delay: 1.2 }}
-            />
+            >
+              <motion.span
+                className="pointer-events-none absolute inset-0 rounded-full bg-[#FFA649]"
+                animate={{ scale: [1, 2.1, 1], opacity: [0.4, 0, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 2.2 }}
+              />
+              <span className="relative block h-4 w-4 rounded-full border-2 border-[#FFA649] bg-[#283845]" />
+            </motion.div>
           </div>
           <div className="mt-3 flex justify-between">
             {Array.from({ length: 24 }).map((_, i) => (
@@ -429,7 +519,7 @@ export default function Hero() {
           {TAGS.map((tag) => (
             <span
               key={tag}
-              className="tl-tag rounded-full border border-[#8FA1AD]/20 px-4 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[#8FA1AD]"
+              className="tl-tag cursor-default rounded-full border border-[#8FA1AD]/20 px-4 py-1.5 font-mono text-[11px] uppercase tracking-wide text-[#8FA1AD] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#FFA649]/40 hover:text-[#FFA649] hover:shadow-[0_8px_20px_-10px_rgba(255,166,73,0.4)]"
             >
               {tag}
             </span>
@@ -449,6 +539,8 @@ export default function Hero() {
           </p>
           <div
             ref={marqueeRef}
+            onMouseEnter={() => setLogoMarqueeHover(true)}
+            onMouseLeave={() => setLogoMarqueeHover(false)}
             className="flex w-max items-center gap-12"
           >
             {[...LOGOS, ...LOGOS].map((logo, i) => (
@@ -460,6 +552,35 @@ export default function Hero() {
               </span>
             ))}
           </div>
+        </motion.div>
+      </motion.div>
+
+      {/* scroll cue — visible on load, fades once the person actually scrolls */}
+      <motion.div
+        className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center"
+        style={{ opacity: scrollCueOpacity }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 2.6 }}
+          className="flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-[#8FA1AD]"
+        >
+          <span>Scroll</span>
+          <motion.svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <path d="m6 9 6 6 6-6" />
+          </motion.svg>
         </motion.div>
       </motion.div>
     </section>
