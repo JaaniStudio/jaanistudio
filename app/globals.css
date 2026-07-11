@@ -25,6 +25,17 @@ select:hover,
   cursor: url("/selection.png") 8 8, pointer !important;
 }
 
+/* Grab cursor */
+.grab {
+  cursor: url("/grab.png") 16 16, grabbing;
+}
+
+/* Grabbing cursor (while dragging) */
+/* .grab:active {
+  cursor: url("/grab.png") 16 16, grab;
+} */
+
+
 html {
   scroll-behavior: smooth;
 }
