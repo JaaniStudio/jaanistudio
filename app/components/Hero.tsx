@@ -323,7 +323,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="font-[--font-display] text-5xl leading-[0.95] tracking-tight text-[#F3ECE0] sm:text-6xl md:text-7xl lg:text-[4.5rem]">
+        <h1 className="h-font text-5xl leading-[0.95] tracking-tight text-[#F3ECE0] sm:text-4xl md:text-6xl lg:text-[3.5rem]">
           <span className="block overflow-hidden pb-1">
             <span className="inline-block">
               {HEADLINE_LINE_1.split('').map((ch, i) => (
@@ -546,7 +546,7 @@ export default function Hero() {
             {[...LOGOS, ...LOGOS].map((logo, i) => (
               <span
                 key={`${logo}-${i}`}
-                className="whitespace-nowrap font-[--font-display] text-sm font-semibold text-[#F3ECE0]/40 transition-colors duration-300 hover:text-[#F3ECE0]/80"
+                className="whitespace-nowrap h-font text-sm font-semibold text-[#F3ECE0]/40 transition-colors duration-300 hover:text-[#F3ECE0]/80"
               >
                 {logo}
               </span>
