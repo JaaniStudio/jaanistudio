@@ -69,7 +69,7 @@ function TrackStrip({ seed }: { seed: number }) {
   const ticks = Array.from({ length: 36 });
   return (
     <div className="relative mt-8 h-6 overflow-hidden">
-      <div className="flex h-full items-end gap-[3px]">
+      <div className="flex h-full items-end gap-0.75">
         {ticks.map((_, i) => (
           <span
             key={i}
@@ -79,7 +79,7 @@ function TrackStrip({ seed }: { seed: number }) {
         ))}
       </div>
       <motion.div
-        className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-transparent via-[#FFA649]/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r from-transparent via-[#FFA649]/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         initial={{ x: '-120%' }}
         whileHover={{ x: '420%' }}
         transition={{ duration: 1.4, ease: 'easeInOut' }}
