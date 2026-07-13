@@ -213,7 +213,7 @@ export default function Contact() {
         <div className="grid gap-16 md:grid-cols-[1fr_1.1fr]">
           <div>
             <motion.h2
-              className="font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+              className="h-font text-3xl leading-tight text-[#F3ECE0] sm:text-3xl md:text-4xl"
               initial={{ y: 30, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
@@ -333,7 +333,7 @@ export default function Contact() {
                         </motion.div>
                       </div>
                       <motion.h3
-                        className="mt-5 font-[--font-display] text-2xl text-[#F3ECE0]"
+                        className="mt-5 h-font text-2xl text-[#F3ECE0]"
                         initial={{ y: 10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 0.4, ease: EASE, delay: 0.3 }}

@@ -159,7 +159,7 @@ function ProjectCard({
                 </span>
               </div>
               <div>
-                <motion.h3 className="flex items-center gap-1.5 font-[--font-display] text-xl font-semibold text-[#F3ECE0] transition-all duration-300 group-hover:translate-x-1">
+                <motion.h3 className="flex items-center gap-1.5 h-font text-xl font-semibold text-[#F3ECE0] transition-all duration-300 group-hover:translate-x-1">
                   {project.name}
                   {project.type === 'web' && (
                     <ArrowUpRight className="h-4 w-4 text-[#FFA649] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -254,7 +254,7 @@ export default function Portfolio() {
 
             <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <motion.h2
-                className="max-w-lg font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+                className="max-w-lg h-font text-3xl leading-tight text-[#F3ECE0] sm:text-3xl md:text-4xl"
                 initial={{ y: 30, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}

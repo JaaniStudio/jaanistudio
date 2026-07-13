@@ -135,7 +135,7 @@ export default function Services() {
         </motion.div>
 
         <motion.h2
-          className="max-w-2xl font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+          className="max-w-2xl h-font text-3xl leading-tight text-[#F3ECE0] sm:text-3xl md:text-4xl"
           initial={{ y: 30, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
@@ -158,7 +158,7 @@ export default function Services() {
                   <div className="group relative overflow-hidden bg-[#1B262E] p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#283845] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10">
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute -bottom-6 -right-2 select-none font-[--font-display] text-8xl font-bold text-[#F3ECE0] opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.06]"
+                      className="pointer-events-none absolute -bottom-6 -right-2 select-none h-font text-8xl font-bold text-[#F3ECE0] opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.06]"
                     >
                       {service.track}
                     </span>
@@ -179,7 +179,7 @@ export default function Services() {
                         />
                       </motion.div>
                     </div>
-                    <h3 className="relative font-[--font-display] text-xl font-semibold text-[#F3ECE0] sm:text-2xl">
+                    <h3 className="relative h-font text-xl font-semibold text-[#F3ECE0] sm:text-2xl">
                       {service.title}
                     </h3>
                     <p className="relative mt-3 text-[#C9D3D9]">{service.description}</p>

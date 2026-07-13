@@ -166,7 +166,7 @@ function TeamCard({ member, index }: { member: (typeof TEAM)[number]; index: num
         </motion.div>
 
         <div className="relative mt-6 text-center" style={{ transform: 'translateZ(40px)' }}>
-          <h3 className="font-[--font-display] text-2xl text-[#F3ECE0]">{member.name}</h3>
+          <h3 className="h-font text-2xl text-[#F3ECE0]">{member.name}</h3>
           <p className="mt-1 font-mono text-xs uppercase tracking-widest text-[#8FA1AD]">
             {member.role}
           </p>
@@ -309,13 +309,12 @@ export default function About() {
           <div className="grid gap-16 md:grid-cols-[1.3fr_1fr]">
             <div>
               <motion.h2
-                className="font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+                className="h-font text-2xl leading-tight text-[#F3ECE0] sm:text-2xl md:text-4xl"
                 initial={{ y: 40, opacity: 0 }}
                 animate={isInView ? { y: 0, opacity: 1 } : {}}
                 transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
               >
-                We started as two freelancers arguing over the same export settings, three energy
-                drinks deep.
+                Started with an export settings argument. Powered by energy drinks.
               </motion.h2>
               <motion.p
                 className="mt-6 max-w-lg text-[#C9D3D9]"
@@ -420,7 +419,7 @@ export default function About() {
 
           <div className="max-w-2xl">
             <motion.h2
-              className="font-[--font-display] text-3xl leading-tight text-[#F3ECE0] sm:text-4xl md:text-5xl"
+              className="h-font text-3xl leading-tight text-[#F3ECE0] sm:text-3xl md:text-4xl"
               initial={{ y: 40, opacity: 0 }}
               animate={teamInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
