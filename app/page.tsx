@@ -12,9 +12,9 @@ export default function Page() {
       <Navbar />
       <main>
         <Hero />
-        <About />
         <Services />
         <Portfolio />
+        <About />
         <Contact />
       </main>
       <Footer />
