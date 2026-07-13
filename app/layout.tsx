@@ -14,7 +14,7 @@ const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${plexMono.variable}`}>
-      <body className="bg-[#283845] font-sans">
+      <body className="bg-[#080808] font-sans">
         <CustomCursor />
         {children}
       </body>
