@@ -150,7 +150,7 @@ export default function Footer() {
           {Array.from({ length: 12 }).map((_, i) => (
             <span
               key={i}
-              className="group flex items-center gap-8 font-[--font-display] text-2xl font-semibold text-[#F3ECE0]/30 transition-all duration-300 hover:text-[#F3ECE0]/50 sm:text-3xl"
+              className="group flex items-center gap-8 h-font text-2xl font-semibold text-[#F3ECE0]/30 transition-all duration-300 hover:text-[#F3ECE0]/50 sm:text-3xl"
             >
               Say jaani, let&rsquo;s make something
               <span className="marquee-star inline-block text-[#FFA649]/50 transition-all duration-300 group-hover:text-[#FFA649]">
@@ -185,7 +185,7 @@ export default function Footer() {
               />
               <span className="text-[#8FA1AD]">Outro</span>
             </motion.div>
-            <h2 className="max-w-xl font-[--font-display] text-4xl leading-[1.05] text-[#F3ECE0] sm:text-5xl md:text-6xl">
+            <h2 className="max-w-xl h-font text-4xl leading-[1.05] text-[#F3ECE0] sm:text-4xl md:text-5xl">
               Let&rsquo;s cut something <span className="text-[#FFA649]">worth watching.</span>
             </h2>
           </div>
@@ -205,7 +205,7 @@ export default function Footer() {
           animate={isInView ? 'visible' : 'hidden'}
         >
           <motion.div custom={0} variants={staggers}>
-            <span className="font-[--font-display] text-lg font-bold text-[#F3ECE0]">
+            <span className="h-font text-lg font-bold text-[#F3ECE0]">
               JAANI<span className="text-[#FFA649]">.studio</span>
             </span>
             <p className="mt-3 max-w-[24ch] text-sm text-[#8FA1AD]">
