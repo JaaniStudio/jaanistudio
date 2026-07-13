@@ -193,7 +193,7 @@ function TeamCard({ member, index }: { member: (typeof TEAM)[number]; index: num
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-7 bottom-5 h-px scale-x-0 bg-gradient-to-r from-transparent via-[#FFA649]/60 to-transparent transition-transform duration-500 group-hover:scale-x-100" />
+        <div className="pointer-events-none absolute inset-x-7 bottom-5 h-px scale-x-0 bg-linear-to-r from-transparent via-[#FFA649]/60 to-transparent transition-transform duration-500 group-hover:scale-x-100" />
       </motion.div>
     </motion.div>
   );
@@ -371,8 +371,8 @@ export default function About() {
           onMouseLeave={() => setMarqueeHover(false)}
           className="relative mt-20 overflow-hidden border-y border-[#FFA649]/10 py-5"
         >
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#283845] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#283845] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-linear-to-r from-[#283845] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-linear-to-l from-[#283845] to-transparent" />
           <div ref={trackRef} className="flex w-max gap-12">
             {[...TOOLS, ...TOOLS].map((tool, i) => (
               <span
