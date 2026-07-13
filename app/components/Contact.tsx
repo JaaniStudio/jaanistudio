@@ -170,7 +170,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#1B262E] px-6 py-24 md:py-32"
+      className="relative overflow-hidden bg-[#1a1a1a] px-6 py-24 md:py-32"
       ref={sectionRef}
     >
       <div className="pointer-events-none absolute inset-0">
@@ -279,7 +279,7 @@ export default function Contact() {
             <motion.div
               ref={cardRef}
               onMouseMove={handleCardMouseMove}
-              className="relative overflow-hidden rounded-2xl border border-[#FFA649]/10 bg-[#283845] p-6 transition-colors duration-500 hover:border-[#FFA649]/25 sm:p-8"
+              className="relative overflow-hidden rounded-2xl border border-[#FFA649]/10 bg-[#080808] p-6 transition-colors duration-500 hover:border-[#FFA649]/25 sm:p-8"
             >
               <motion.div
                 aria-hidden
@@ -371,7 +371,7 @@ export default function Contact() {
                               name="name"
                               type="text"
                               required
-                              className="peer w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] py-3 pl-11 pr-4 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                              className="peer w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1a1a1a] py-3 pl-11 pr-4 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
                               placeholder="Jordan Kane"
                             />
                           </div>
@@ -389,7 +389,7 @@ export default function Contact() {
                               name="email"
                               type="email"
                               required
-                              className="peer w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] py-3 pl-11 pr-4 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                              className="peer w-full rounded-lg border border-[#8FA1AD]/20 bg-[#1a1a1a] py-3 pl-11 pr-4 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
                               placeholder="jordan@brand.com"
                             />
                           </div>
@@ -405,7 +405,7 @@ export default function Contact() {
                             id="type"
                             name="type"
                             defaultValue={PROJECT_TYPES[0]}
-                            className="w-full appearance-none rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 pr-10 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                            className="w-full appearance-none rounded-lg border border-[#8FA1AD]/20 bg-[#1a1a1a] px-4 py-3 pr-10 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
                           >
                             {PROJECT_TYPES.map((type) => (
                               <option key={type} value={type}>
@@ -428,7 +428,7 @@ export default function Contact() {
                           name="message"
                           rows={4}
                           required
-                          className="w-full resize-none rounded-lg border border-[#8FA1AD]/20 bg-[#1B262E] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
+                          className="w-full resize-none rounded-lg border border-[#8FA1AD]/20 bg-[#1a1a1a] px-4 py-3 text-[#F3ECE0] outline-none transition-all duration-300 focus:border-[#FFA649] focus:shadow-[0_0_0_4px_rgba(255,166,73,0.12)]"
                           placeholder="What are you building, and by when?"
                         />
                       </motion.div>

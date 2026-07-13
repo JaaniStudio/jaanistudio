@@ -253,7 +253,7 @@ export default function Hero() {
       ref={rootRef}
       onMouseMove={handlePointerMove}
       onMouseLeave={handlePointerLeave}
-      className="relative overflow-hidden bg-[#283845] px-6 pb-24 pt-24 md:pb-32 md:pt-24"
+      className="relative overflow-hidden bg-[#080808] px-6 pb-24 pt-24 md:pb-32 md:pt-24"
     >
       {/* ambient top wash for depth */}
       <motion.div
@@ -286,13 +286,13 @@ export default function Hero() {
 
       {/* cinematic curtain reveal */}
       <motion.div
-        className="pointer-events-none absolute inset-x-0 top-0 z-30 bg-[#1b252e]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-30 bg-[#1a1a1a]"
         initial={{ height: '52%' }}
         animate={{ height: 0 }}
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
       />
       <motion.div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-30 bg-[#1b252e]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-30 bg-[#1a1a1a]"
         initial={{ height: '52%' }}
         animate={{ height: 0 }}
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
@@ -427,7 +427,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4, transition: { duration: 0.3 } }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 2.4 }}
-                className="pointer-events-none absolute right-2 top-0 z-10 whitespace-nowrap rounded-full border border-[#FFA649]/20 bg-[#1B262E]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#8FA1AD] backdrop-blur"
+                className="pointer-events-none absolute right-2 top-0 z-10 whitespace-nowrap rounded-full border border-[#FFA649]/20 bg-[#1a1a1a]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#8FA1AD] backdrop-blur"
               >
                 ↔ drag me
               </motion.span>
@@ -496,7 +496,7 @@ export default function Hero() {
                 animate={{ scale: [1, 2.1, 1], opacity: [0.4, 0, 0.4] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 2.2 }}
               />
-              <span className="relative block h-4 w-4 rounded-full border-2 border-[#FFA649] bg-[#283845]" />
+              <span className="relative block h-4 w-4 rounded-full border-2 border-[#FFA649] bg-[#080808]" />
             </motion.div>
           </div>
           <div className="mt-3 flex justify-between">

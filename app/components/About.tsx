@@ -122,7 +122,7 @@ function TeamCard({ member, index }: { member: (typeof TEAM)[number]; index: num
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-        className="group relative overflow-hidden rounded-3xl border border-[#FFA649]/12 bg-[#20303c] px-7 pb-7 pt-10 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] transition-colors duration-300 hover:border-[#FFA649]/35"
+        className="group relative overflow-hidden rounded-3xl border border-[#FFA649]/12 bg-[#1a1a1a] px-7 pb-7 pt-10 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] transition-colors duration-300 hover:border-[#FFA649]/35"
       >
         <motion.div
           aria-hidden
@@ -266,7 +266,7 @@ export default function About() {
     <>
       <section
         id="about"
-        className="relative overflow-hidden bg-[#283845] px-6 py-24 md:py-32"
+        className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32"
         ref={sectionRef}
       >
         <div className="pointer-events-none absolute inset-0">
@@ -350,7 +350,7 @@ export default function About() {
                   custom={i}
                   variants={staggerItem}
                   whileHover={{ x: 4 }}
-                  className="group bg-[#283845] px-6 py-5 transition-colors duration-300 hover:bg-[#2f4150] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
+                  className="group bg-[#080808] px-6 py-5 transition-colors duration-300 hover:bg-[#1a1a1a] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
                 >
                   <dt className="font-mono text-[11px] uppercase tracking-widest text-[#8FA1AD]">
                     {item.label}
@@ -370,8 +370,8 @@ export default function About() {
           onMouseLeave={() => setMarqueeHover(false)}
           className="relative mt-20 overflow-hidden border-y border-[#FFA649]/10 py-5"
         >
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-linear-to-r from-[#283845] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-linear-to-l from-[#283845] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-linear-to-r from-[#080808] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-linear-to-l from-[#080808] to-transparent" />
           <div ref={trackRef} className="flex w-max gap-12">
             {[...TOOLS, ...TOOLS].map((tool, i) => (
               <span
@@ -387,7 +387,7 @@ export default function About() {
 
       <section
         id="team"
-        className="relative overflow-hidden bg-[#20303c] px-6 py-24 md:py-32"
+        className="relative overflow-hidden bg-[#1a1a1a] px-6 py-24 md:py-32"
         ref={teamRef}
       >
         <div className="pointer-events-none absolute inset-0">

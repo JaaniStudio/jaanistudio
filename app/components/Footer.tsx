@@ -114,7 +114,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden bg-[#283845] px-6 pb-8 pt-20 md:pt-28" ref={sectionRef}>
+    <footer className="relative overflow-hidden bg-[#080808] px-6 pb-8 pt-20 md:pt-28" ref={sectionRef}>
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           className="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-60"

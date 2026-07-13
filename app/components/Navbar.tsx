@@ -35,7 +35,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed left-0 right-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled ? 'border-b border-[#FFA649]/10 bg-[#283845]/90 backdrop-blur-md' : 'bg-transparent'
+        scrolled ? 'border-b border-[#FFA649]/10 bg-[#080808]/90 backdrop-blur-md' : 'bg-transparent'
       }`}
       style={{ isolation: 'isolate' }}
     >
@@ -139,7 +139,7 @@ export default function Navbar() {
             className="grid md:hidden"
           >
             <div className="overflow-hidden">
-              <div className="border-t border-[#FFA649]/10 bg-[#283845] px-6 pb-6 pt-4">
+              <div className="border-t border-[#FFA649]/10 bg-[#080808] px-6 pb-6 pt-4">
                 <motion.div
                   className="flex flex-col gap-4"
                   initial="hidden"
