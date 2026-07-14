@@ -17,14 +17,17 @@ type NetworkBackgroundProps = {
   density?: number;
   /** Max distance (px) at which two particles are linked by a line. */
   linkDistance?: number;
+  /** Overall opacity of the whole effect (0–1). Turn this down for an even more subtle look. */
+  opacity?: number;
   /** Extra className passed to the wrapping div. */
   className?: string;
 };
 
 export default function NetworkBackground({
   color = '255,166,73', // #FFA649
-  density = 9000,
-  linkDistance = 150,
+  density = 16000,
+  linkDistance = 130,
+  opacity = 0.85,
   className = '',
 }: NetworkBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -50,7 +53,7 @@ export default function NetworkBackground({
 
     function makeParticles() {
       const area = width * height;
-      const count = Math.max(24, Math.min(90, Math.round(area / density)));
+      const count = Math.max(18, Math.min(55, Math.round(area / density)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -114,7 +117,7 @@ export default function NetworkBackground({
 
         ctx!.beginPath();
         ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(${color}, 0.55)`;
+        ctx!.fillStyle = `rgba(${color}, 0.28)`;
         ctx!.fill();
       }
 
@@ -127,7 +130,7 @@ export default function NetworkBackground({
           const dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < linkDistance) {
-            const opacity = (1 - dist / linkDistance) * 0.35;
+            const opacity = (1 - dist / linkDistance) * 0.16;
             ctx!.beginPath();
             ctx!.moveTo(a.x, a.y);
             ctx!.lineTo(b.x, b.y);
@@ -145,7 +148,7 @@ export default function NetworkBackground({
           const dy = p.y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < linkDistance * 1.1) {
-            const opacity = (1 - dist / (linkDistance * 1.1)) * 0.45;
+            const opacity = (1 - dist / (linkDistance * 1.1)) * 0.22;
             ctx!.beginPath();
             ctx!.moveTo(p.x, p.y);
             ctx!.lineTo(mouse.x, mouse.y);
@@ -189,7 +192,7 @@ export default function NetworkBackground({
   }, [color, density, linkDistance]);
 
   return (
-    <div className={`pointer-events-none absolute inset-0 ${className}`}>
+    <div className={`pointer-events-none absolute inset-0 ${className}`} style={{ opacity }}>
       <canvas ref={canvasRef} className="pointer-events-auto h-full w-full" />
     </div>
   );
