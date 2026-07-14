@@ -239,7 +239,7 @@ export default function Portfolio() {
           {/* animated particle network — premium ambient background */}
           <NetworkBackground className="z-1" />
 
-          <div className="relative mx-auto w-full max-w-6xl shrink-0 px-6 pt-24 md:pt-28">
+          <div className="relative z-10 mx-auto w-full max-w-6xl shrink-0 px-6 pt-24 md:pt-28">
             <motion.div
               className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
               initial={{ y: 20, opacity: 0 }}

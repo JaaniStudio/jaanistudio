@@ -165,7 +165,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           className="relative flex flex-col justify-between gap-10 overflow-hidden border-b border-[#FFA649]/10 pb-16 md:flex-row md:items-end"
           custom={0}
