@@ -286,7 +286,7 @@ export default function Hero() {
       />
 
       {/* animated particle network — premium ambient background */}
-      <NetworkBackground className="z-[1]" />
+      <NetworkBackground className="z-1" />
 
       {/* cinematic curtain reveal */}
       <motion.div
