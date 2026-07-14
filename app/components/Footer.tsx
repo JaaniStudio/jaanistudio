@@ -180,7 +180,7 @@ export default function Footer() {
               animate={isInView ? { y: 0, opacity: 1 } : {}}
               transition={{ duration: 0.5, ease: EASE }}
             >
-              <span>00:05</span>
+              <span>00:06</span>
               <motion.span
                 className="h-px w-10 origin-left bg-[#FFA649]/20"
                 initial={{ scaleX: 0 }}

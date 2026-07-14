@@ -129,7 +129,7 @@ export default function Services() {
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <span>00:02</span>
+          <span>00:01</span>
           <motion.span
             className="h-px flex-1 origin-left bg-[#FFA649]/20"
             initial={{ scaleX: 0 }}

@@ -301,7 +301,7 @@ export default function About() {
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            <span>00:01</span>
+            <span>00:03</span>
             <motion.span
               className="h-px flex-1 bg-[#FFA649]/20 origin-left"
               initial={{ scaleX: 0 }}
@@ -415,7 +415,7 @@ export default function About() {
             animate={teamInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            <span>00:02</span>
+            <span>00:04</span>
             <motion.span
               className="h-px flex-1 bg-[#FFA649]/20 origin-left"
               initial={{ scaleX: 0 }}
