@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, startTransition } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence, useAnimationControls } from 'framer-motion';
 import MagneticButton from './MagneticButton';
+import NetworkBackground from './NetworkBackground';
 import Image from 'next/image';
 
 const ROTATING_WORDS = ['their mark.', 'different.', 'the scroll.', 'your inbox.'];
@@ -284,15 +285,18 @@ export default function Hero() {
         }}
       />
 
+      {/* animated particle network — premium ambient background */}
+      <NetworkBackground className="z-[1]" />
+
       {/* cinematic curtain reveal */}
       <motion.div
-        className="pointer-events-none absolute inset-x-0 top-0 z-30 bg-[#1a1a1a]"
+        className="pointer-events-none absolute inset-x-0 top-0 z-30 bg-[#080808]"
         initial={{ height: '52%' }}
         animate={{ height: 0 }}
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
       />
       <motion.div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-30 bg-[#1a1a1a]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-30 bg-[#080808]"
         initial={{ height: '52%' }}
         animate={{ height: 0 }}
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
@@ -427,7 +431,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4, transition: { duration: 0.3 } }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 2.4 }}
-                className="pointer-events-none absolute right-2 top-0 z-10 whitespace-nowrap rounded-full border border-[#FFA649]/20 bg-[#1a1a1a]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#8FA1AD] backdrop-blur"
+                className="pointer-events-none absolute right-2 top-0 z-10 whitespace-nowrap rounded-full border border-[#FFA649]/20 bg-[#080808]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#8FA1AD] backdrop-blur"
               >
                 ↔ drag me
               </motion.span>

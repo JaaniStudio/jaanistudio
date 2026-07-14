@@ -33,7 +33,7 @@ const PROJECTS: Project[] = [
     name: 'Northbound Coffee',
     category: 'Brand site + launch page',
     meta: 'Live site',
-    gradient: 'from-[#FFA649]/25 via-[#080808] to-[#1a1a1a]',
+    gradient: 'from-[#FFA649]/25 via-[#080808] to-[#080808]',
   },
   {
     id: 'p2',
@@ -42,7 +42,7 @@ const PROJECTS: Project[] = [
     name: 'Fielder Outdoor',
     category: 'Product launch film',
     meta: '1:24',
-    gradient: 'from-[#8FA1AD]/25 via-[#080808] to-[#1a1a1a]',
+    gradient: 'from-[#8FA1AD]/25 via-[#080808] to-[#080808]',
   },
   {
     id: 'p3',
@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
     name: 'Havenly',
     category: 'E-commerce build',
     meta: 'Live site',
-    gradient: 'from-[#FFA649]/20 via-[#1a1a1a] to-[#080808]',
+    gradient: 'from-[#FFA649]/20 via-[#080808] to-[#080808]',
   },
   {
     id: 'p4',
@@ -60,7 +60,7 @@ const PROJECTS: Project[] = [
     name: 'Marlow & Co',
     category: 'Founder story',
     meta: '2:10',
-    gradient: 'from-[#8FA1AD]/20 via-[#1a1a1a] to-[#080808]',
+    gradient: 'from-[#8FA1AD]/20 via-[#080808] to-[#080808]',
   },
   {
     id: 'p5',
@@ -69,7 +69,7 @@ const PROJECTS: Project[] = [
     name: 'Ridgeline Media',
     category: 'Social content, 40 clips',
     meta: '0:38',
-    gradient: 'from-[#FFA649]/25 via-[#080808] to-[#1a1a1a]',
+    gradient: 'from-[#FFA649]/25 via-[#080808] to-[#080808]',
   },
   {
     id: 'p6',
@@ -78,7 +78,7 @@ const PROJECTS: Project[] = [
     name: 'Northline Dental',
     category: 'Booking site + dashboard',
     meta: 'Live site',
-    gradient: 'from-[#8FA1AD]/25 via-[#1a1a1a] to-[#080808]',
+    gradient: 'from-[#8FA1AD]/25 via-[#080808] to-[#080808]',
   },
 ];
 
@@ -124,8 +124,8 @@ function ProjectCard({
             data-cursor
           >
             {project.type === 'web' ? (
-              <div className="absolute inset-0 flex flex-col bg-[#1a1a1a]">
-                <div className="flex items-center gap-1.5 border-b border-white/5 bg-[#1a1a1a] px-3 py-2">
+              <div className="absolute inset-0 flex flex-col bg-[#080808]">
+                <div className="flex items-center gap-1.5 border-b border-white/5 bg-[#080808] px-3 py-2">
                   <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
                   <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
                   <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
@@ -140,7 +140,7 @@ function ProjectCard({
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                     <motion.span
-                    className="flex h-14 w-14 items-center justify-center rounded-full bg-[#1a1a1a]/70 backdrop-blur transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:bg-[#FFA649]/20 group-hover:shadow-[0_0_30px_rgba(255,166,73,0.3)]"
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-[#080808]/70 backdrop-blur transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:bg-[#FFA649]/20 group-hover:shadow-[0_0_30px_rgba(255,166,73,0.3)]"
                     whileHover={{ scale: 1.1 }}
                   >
                     <Play className="ml-0.5 h-5 w-5 fill-[#FFA649] text-[#FFA649]" />
@@ -151,10 +151,10 @@ function ProjectCard({
 
             <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-6">
               <div className="flex items-center justify-between">
-                <span className="w-fit rounded bg-[#1a1a1a]/70 px-2 py-1 font-mono text-[11px] text-[#FFA649] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/20">
+                <span className="w-fit rounded bg-[#080808]/70 px-2 py-1 font-mono text-[11px] text-[#FFA649] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/20">
                   {project.reel}
                 </span>
-                <span className="rounded bg-[#1a1a1a]/70 px-2 py-1 font-mono text-[11px] text-[#8FA1AD] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/10 group-hover:text-[#FFA649]">
+                <span className="rounded bg-[#080808]/70 px-2 py-1 font-mono text-[11px] text-[#8FA1AD] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/10 group-hover:text-[#FFA649]">
                   {project.meta}
                 </span>
               </div>
@@ -297,7 +297,7 @@ export default function Portfolio() {
           </div>
 
           <div className="relative mt-6 flex min-h-0 flex-1">
-            <div className="flex w-full items-center border-y border-[#FFA649]/15 bg-[#1a1a1a]/40 py-2">
+            <div className="flex w-full items-center border-y border-[#FFA649]/15 bg-[#080808]/40 py-2">
               <motion.div ref={trackRef} style={{ x }} className="flex gap-4 px-6">
                 <AnimatePresence mode="popLayout">
                   {filtered.map((project, i) => (

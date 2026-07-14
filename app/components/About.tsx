@@ -122,7 +122,7 @@ function TeamCard({ member, index }: { member: (typeof TEAM)[number]; index: num
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-        className="group relative overflow-hidden rounded-3xl border border-[#FFA649]/12 bg-[#1a1a1a] px-7 pb-7 pt-10 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] transition-colors duration-300 hover:border-[#FFA649]/35"
+        className="group relative overflow-hidden rounded-3xl border border-[#FFA649]/12 bg-[#080808] px-7 pb-7 pt-10 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] transition-colors duration-300 hover:border-[#FFA649]/35"
       >
         <motion.div
           aria-hidden
@@ -350,7 +350,7 @@ export default function About() {
                   custom={i}
                   variants={staggerItem}
                   whileHover={{ x: 4 }}
-                  className="group bg-[#080808] px-6 py-5 transition-colors duration-300 hover:bg-[#1a1a1a] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
+                  className="group bg-[#080808] px-6 py-5 transition-colors duration-300 hover:bg-[#080808] hover:shadow-[inset_0_0_20px_rgba(255,166,73,0.06)]"
                 >
                   <dt className="font-mono text-[11px] uppercase tracking-widest text-[#8FA1AD]">
                     {item.label}
@@ -387,7 +387,7 @@ export default function About() {
 
       <section
         id="team"
-        className="relative overflow-hidden bg-[#1a1a1a] px-6 py-24 md:py-32"
+        className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32"
         ref={teamRef}
       >
         <div className="pointer-events-none absolute inset-0">

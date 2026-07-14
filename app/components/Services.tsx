@@ -96,7 +96,7 @@ export default function Services() {
   const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
 
   return (
-    <section id="services" className="relative overflow-hidden bg-[#1a1a1a] px-6 py-24 md:py-32" ref={sectionRef}>
+    <section id="services" className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="pointer-events-none absolute inset-0">
         <motion.div
           className="absolute -right-32 top-1/3 h-80 w-80 rounded-full opacity-50"
@@ -155,7 +155,7 @@ export default function Services() {
                 animate={gridInView ? 'visible' : 'hidden'}
               >
                 <TiltCard tiltDegree={4} glare={true} className="h-full">
-                  <div className="group relative overflow-hidden bg-[#1a1a1a] p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#080808] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10">
+                  <div className="group relative overflow-hidden bg-[#080808] p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#080808] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10">
                     <span
                       aria-hidden
                       className="pointer-events-none absolute -bottom-6 -right-2 select-none h-font text-8xl font-bold text-[#F3ECE0] opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.06]"
