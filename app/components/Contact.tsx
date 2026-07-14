@@ -10,6 +10,8 @@ import {
   useTransform,
 } from 'framer-motion';
 import NetworkBackground from './NetworkBackground';
+import { useForm } from "@formspree/react";
+
 
 const PROJECT_TYPES = ['Website', 'Brand video', 'Motion graphics', 'Ongoing content', 'Not sure yet'];
 
@@ -129,7 +131,7 @@ function SendButton({ custom }: { custom: number }) {
 }
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [state, handleFormspreeSubmit] = useForm("xnnnnabc");
   const [copied, setCopied] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
@@ -153,9 +155,9 @@ export default function Contact() {
     glowY.set(((e.clientY - rect.top) / rect.height) * 100);
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    await handleFormspreeSubmit(e);
   }
 
   async function handleCopyEmail() {
@@ -194,7 +196,7 @@ export default function Contact() {
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
         />
       </div>
-      
+
       {/* animated particle network — premium ambient background */}
       <NetworkBackground className="z-1" />
 
@@ -293,7 +295,7 @@ export default function Contact() {
               />
               <div className="relative">
                 <AnimatePresence mode="wait">
-                  {submitted ? (
+                  {state.succeeded ? (
                     <motion.div
                       key="success"
                       initial={{ scale: 0.9, opacity: 0 }}
