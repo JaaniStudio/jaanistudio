@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import MagneticButton from './MagneticButton';
+import NetworkBackground from './NetworkBackground';
 
 const SITEMAP = [
   { label: 'Work', href: '#work' },
@@ -135,6 +136,9 @@ export default function Footer() {
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
         />
       </div>
+
+      {/* animated particle network — premium ambient background */}
+      <NetworkBackground className="z-1" />
 
       <div
         ref={marqueeWrapRef}

@@ -12,6 +12,7 @@ import {
 } from 'framer-motion';
 import { Play, ArrowUpRight } from 'lucide-react';
 import TiltCard from './TiltCard';
+import NetworkBackground from './NetworkBackground';
 
 type ProjectType = 'web' | 'video';
 
@@ -234,6 +235,9 @@ export default function Portfolio() {
               transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
             />
           </div>
+          
+          {/* animated particle network — premium ambient background */}
+          <NetworkBackground className="z-1" />
 
           <div className="relative mx-auto w-full max-w-6xl shrink-0 px-6 pt-24 md:pt-28">
             <motion.div

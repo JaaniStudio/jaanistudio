@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import NetworkBackground from './NetworkBackground';
 
 function InstagramIcon({ size = 15 }: { size?: number }) {
   return (
@@ -289,6 +290,10 @@ export default function About() {
             transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
         </div>
+        
+        {/* animated particle network — premium ambient background */}
+        <NetworkBackground className="z-1" />
+
         <div className="mx-auto max-w-6xl">
           <motion.div
             className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
@@ -399,6 +404,9 @@ export default function About() {
             }}
           />
         </div>
+
+        {/* animated particle network — premium ambient background */}
+        <NetworkBackground className="z-1" />
 
         <div className="relative mx-auto max-w-6xl">
           <motion.div

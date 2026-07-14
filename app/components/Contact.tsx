@@ -9,6 +9,7 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
+import NetworkBackground from './NetworkBackground';
 
 const PROJECT_TYPES = ['Website', 'Brand video', 'Motion graphics', 'Ongoing content', 'Not sure yet'];
 
@@ -193,6 +194,10 @@ export default function Contact() {
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
         />
       </div>
+      
+      {/* animated particle network — premium ambient background */}
+      <NetworkBackground className="z-1" />
+
       <div className="mx-auto max-w-6xl">
         <motion.div
           className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"

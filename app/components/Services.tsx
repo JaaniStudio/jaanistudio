@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Code2, Clapperboard, Sparkles, Scissors } from 'lucide-react';
 import TiltCard from './TiltCard';
+import NetworkBackground from './NetworkBackground';
 
 const SERVICES = [
   {
@@ -117,6 +118,10 @@ export default function Services() {
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
         />
       </div>
+
+      {/* animated particle network — premium ambient background */}
+      <NetworkBackground className="z-1" />
+
       <div className="mx-auto max-w-6xl">
         <motion.div
           className="mb-14 flex items-center gap-4 font-mono text-xs uppercase tracking-widest text-[#FFA649]"
