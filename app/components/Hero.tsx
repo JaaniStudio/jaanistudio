@@ -63,8 +63,8 @@ export default function Hero() {
   const springY = useSpring(mouseY, { stiffness: 60, damping: 20, mass: 0.6 });
   const glowX = useTransform(springX, [-1, 1], [-24, 24]);
   const glowY = useTransform(springY, [-1, 1], [-12, 12]);
-  const charRotateY = useTransform(springX, [-1, 1], [-7, 7]);
-  const charRotateX = useTransform(springY, [-1, 1], [6, -6]);
+  const charRotateY = useTransform(springX, [-1, 1], [-12, 12]);
+  const charRotateX = useTransform(springY, [-1, 1], [12, -12]);
   const charPullX = useTransform(springX, [-1, 1], [-16, 16]);
 
   const { scrollY } = useScroll();
@@ -441,7 +441,7 @@ export default function Hero() {
           <div className="relative flex h-full items-end justify-center pb-6">
             <motion.div
               style={{ rotateX: charRotateX, rotateY: charRotateY, x: charPullX }}
-              animate={{ y: [0, -10, 0] }}
+              animate={{ y: [0, -10, 0], scale: [1, 1.015, 1] }}
               transition={{
                 duration: 4.5,
                 repeat: Infinity,

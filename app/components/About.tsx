@@ -267,7 +267,7 @@ export default function About() {
     <>
       <section
         id="about"
-        className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32"
+        className="relative overflow-hidden bg-[#09070B] px-6 py-24 md:py-32"
         ref={sectionRef}
       >
         <div className="pointer-events-none absolute inset-0">
@@ -293,6 +293,10 @@ export default function About() {
         
         {/* animated particle network — premium ambient background */}
         <NetworkBackground className="z-1" />
+
+        <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
+          JAANI
+        </span>
 
         <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
@@ -407,6 +411,10 @@ export default function About() {
 
         {/* animated particle network — premium ambient background */}
         <NetworkBackground className="z-1" />
+
+        <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
+          STUDIO
+        </span>
 
         <div className="relative z-10 mx-auto max-w-6xl">
           <motion.div
