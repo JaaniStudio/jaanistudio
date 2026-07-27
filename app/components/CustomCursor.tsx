@@ -13,6 +13,11 @@ export default function CustomCursor() {
   const springX = useSpring(cursorX, { stiffness: 300, damping: 25 });
   const springY = useSpring(cursorY, { stiffness: 300, damping: 25 });
 
+  const trail1X = useSpring(cursorX, { stiffness: 180, damping: 18 });
+  const trail1Y = useSpring(cursorY, { stiffness: 180, damping: 18 });
+  const trail2X = useSpring(cursorX, { stiffness: 110, damping: 14 });
+  const trail2Y = useSpring(cursorY, { stiffness: 110, damping: 14 });
+
   useEffect(() => {
     const HOVERABLE = 'a, button, input, textarea, select, [data-cursor]';
     let elements: Element[] = [];
@@ -101,6 +106,45 @@ export default function CustomCursor() {
             scale: isVisible ? 1 : 0,
           }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="pointer-events-none fixed z-9997 hidden md:block"
+        style={{
+          x: trail1X,
+          y: trail1Y,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      >
+        <motion.div
+          className="rounded-full bg-[#FFA649]"
+          animate={{
+            width: isHovering ? 6 : 3,
+            height: isHovering ? 6 : 3,
+            opacity: isVisible ? 0.3 : 0,
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.div>
+      <motion.div
+        className="pointer-events-none fixed z-9996 hidden md:block"
+        style={{
+          x: trail2X,
+          y: trail2Y,
+          translateX: '-50%',
+          translateY: '-50%',
+        }}
+      >
+        <motion.div
+          className="rounded-full bg-[#FFA649]"
+          animate={{
+            width: isHovering ? 4 : 2,
+            height: isHovering ? 4 : 2,
+            opacity: isVisible ? 0.15 : 0,
+          }}
+          transition={{ duration: 0.35 }}
         />
       </motion.div>
     </>
