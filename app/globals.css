@@ -46,6 +46,12 @@ html {
   scroll-behavior: smooth;
 }
 
+*:focus-visible {
+  outline: 2px solid rgba(255, 166, 73, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 ::selection {
   background: rgba(255, 166, 73, 0.3);
   color: #F3ECE0;

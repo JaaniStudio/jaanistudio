@@ -14,33 +14,51 @@ export default function CustomCursor() {
   const springY = useSpring(cursorY, { stiffness: 300, damping: 25 });
 
   useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
-    };
+    const HOVERABLE = 'a, button, input, textarea, select, [data-cursor]';
+    let elements: Element[] = [];
 
     const onEnterInteractive = () => setIsHovering(true);
     const onLeaveInteractive = () => setIsHovering(false);
 
-    window.addEventListener('mousemove', onMove, { passive: true });
-
-    const interactives = document.querySelectorAll(
-      'a, button, input, textarea, select, [data-cursor]'
-    );
-    interactives.forEach((el) => {
+    function attach(el: Element) {
       el.addEventListener('mouseenter', onEnterInteractive);
       el.addEventListener('mouseleave', onLeaveInteractive);
-    });
+    }
+
+    function detach(el: Element) {
+      el.removeEventListener('mouseenter', onEnterInteractive);
+      el.removeEventListener('mouseleave', onLeaveInteractive);
+    }
+
+    function attachAll() {
+      detachAll();
+      elements = Array.from(document.querySelectorAll(HOVERABLE));
+      elements.forEach(attach);
+    }
+
+    function detachAll() {
+      elements.forEach(detach);
+      elements = [];
+    }
+
+    const onMove = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+      setIsVisible(true);
+    };
+    window.addEventListener('mousemove', onMove, { passive: true });
+
+    attachAll();
+
+    const observer = new MutationObserver(attachAll);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      interactives.forEach((el) => {
-        el.removeEventListener('mouseenter', onEnterInteractive);
-        el.removeEventListener('mouseleave', onLeaveInteractive);
-      });
+      detachAll();
+      observer.disconnect();
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [cursorX, cursorY]);
 
   return (
     <>

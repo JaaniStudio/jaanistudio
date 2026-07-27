@@ -317,6 +317,9 @@ export default function Portfolio() {
               </motion.div>
             </div>
 
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-linear-to-l from-[#080808] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-linear-to-r from-[#080808] to-transparent" />
+
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-[#FFA649]/10">
               <motion.div
                 className="h-full origin-left bg-[#FFA649]"

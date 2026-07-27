@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google';
+import { Inter, IBM_Plex_Mono } from 'next/font/google';
 import CustomCursor from './components/CustomCursor';
 
 
@@ -10,44 +10,24 @@ const plexMono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], var
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jaanistudio.com/"),
   title: "Jaani Studio",
-  description: "JaaniStudio is a creative digital agency offering full-stack web development, AI-powered solutions, video editing, and graphic design to help businesses build, grow, and stand out online.",
+  description: "Websites and video, on one timeline. Jaani Studio builds sites and cuts footage for brands who'd rather be remembered than ignored.",
 
   keywords: [
-    "personal branding",
-    "personal brand development",
-    "digital branding agency",
     "web design",
     "web development",
-    "conversion copywriting",
-    "copywriting services",
-    "SEO for personal brands",
-    "SEO optimization",
-    "branding and SEO services",
-    "branding studio",
-    "Vistazo Studio",
-    "seo",
-    "designing",
-    "UI/UX",
-    "hire personal branding agency",
-    "all in one branding and web agency",
-    "build a personal brand that stands out",
     "video editing",
-    "graphic designing",
-    "videography",
-    "ad shoot",
-    "videos",
-    "video",
-    "reel making",
-    "reel editing",
-    'long-form videos',
-    "short-form videos",
-    "animation"
+    "brand video",
+    "motion graphics",
+    "social content",
+    "branding studio",
+    "creative agency",
+    "Jaani Studio",
   ],
 
   openGraph: {
     title: "Jaani Studio",
     description:
-      "Helping you !",
+      "Websites and video, on one timeline.",
     url: "https://www.jaanistudio.com/",
     siteName: "Jaani Studio",
     images: [
@@ -65,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Jaani Studio",
     description:
-      "JaaniStudio is a creative digital agency offering full-stack web development, AI-powered solutions, video editing, and graphic design to help businesses build, grow, and stand out online.",
+      "Websites and video, on one timeline. Jaani Studio builds sites and cuts footage for brands who'd rather be remembered than ignored.",
     images: ["/logo.png"],
   },
 };
