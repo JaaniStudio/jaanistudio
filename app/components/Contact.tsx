@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent, type MouseEvent as ReactMouseEvent, useRef, useCallback } from 'react';
+import { useState, type FormEvent, type MouseEvent as ReactMouseEvent, useRef } from 'react';
 import {
   motion,
   useInView,
@@ -61,72 +61,12 @@ function ChevronIcon() {
   );
 }
 
-function PaperclipIcon() {
+function LinkIcon() {
   return (
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
     </svg>
-  );
-}
-
-function FileDropZone({ custom }: { custom: number }) {
-  const [dragOver, setDragOver] = useState(false);
-  const [fileName, setFileName] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setDragOver(true);
-  }, []);
-
-  const handleDragLeave = useCallback(() => {
-    setDragOver(false);
-  }, []);
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setDragOver(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file) setFileName(file.name);
-  }, []);
-
-  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setFileName(file.name);
-  }, []);
-
-  return (
-    <motion.div custom={custom} variants={fieldVariants}>
-      <label className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
-        Attach file <span className="text-[#8FA1AD]/40">(optional)</span>
-      </label>
-      <motion.div
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={() => inputRef.current?.click()}
-        animate={{
-          borderColor: dragOver ? 'rgba(255,166,73,0.5)' : 'rgba(143,161,173,0.12)',
-          backgroundColor: dragOver ? 'rgba(255,166,73,0.04)' : 'transparent',
-        }}
-        transition={{ duration: 0.2 }}
-        className="relative flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed px-4 py-3 text-sm text-[#8FA1AD]/60 transition-colors duration-200 hover:border-[#FFA649]/25 hover:text-[#8FA1AD]"
-      >
-        <span className={fileName ? 'text-[#FFA649]' : ''}>
-          <PaperclipIcon />
-        </span>
-        <span className="truncate">
-          {fileName || 'Drop files here or click to browse'}
-        </span>
-      </motion.div>
-      <input
-        ref={inputRef}
-        type="file"
-        className="hidden"
-        onChange={handleFileChange}
-        accept=".pdf,.zip,.png,.jpg,.mp4,.mov,.doc,.docx"
-      />
-    </motion.div>
   );
 }
 
@@ -202,6 +142,7 @@ function SendButton({ custom }: { custom: number }) {
 export default function Contact() {
   const [state, handleFormspreeSubmit] = useForm("mvzegpgo");
   const [copied, setCopied] = useState(false);
+  const [attachLink, setAttachLink] = useState('');
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
   const formRef = useRef<HTMLDivElement>(null);
@@ -513,7 +454,24 @@ export default function Contact() {
                         />
                       </motion.div>
 
-                      <FileDropZone custom={2.5} />
+                      <motion.div custom={2.5} variants={fieldVariants}>
+                        <label className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
+                          Link <span className="text-[#8FA1AD]/40">(optional)</span>
+                        </label>
+                        <div className="relative">
+                          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#8FA1AD]/40">
+                            <LinkIcon />
+                          </span>
+                          <input
+                            type="url"
+                            name="link"
+                            value={attachLink}
+                            onChange={(e) => setAttachLink(e.target.value)}
+                            placeholder="Paste a link to your brief, portfolio, or reference..."
+                            className="w-full rounded-lg border border-[#8FA1AD]/12 bg-[#080808] py-3 pl-11 pr-4 text-sm text-[#F3ECE0] outline-none transition-all duration-200 focus:border-[#FFA649] placeholder:text-[#8FA1AD]/30"
+                          />
+                        </div>
+                      </motion.div>
 
                       <SendButton custom={3} />
                     </motion.form>
