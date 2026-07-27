@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Code2, Clapperboard, Sparkles, Scissors } from 'lucide-react';
 import TiltCard from './TiltCard';
 import NetworkBackground from './NetworkBackground';
@@ -96,6 +96,13 @@ export default function Services() {
   const gridRef = useRef<HTMLDivElement>(null);
   const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  const blurY1 = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const blurY2 = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
   return (
     <section id="services" className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32" ref={sectionRef}>
       <div className="pointer-events-none absolute inset-0">
@@ -104,6 +111,7 @@ export default function Services() {
           style={{
             background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)',
             filter: 'blur(35px)',
+            y: blurY1,
           }}
           animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.55, 0.4] }}
           transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
@@ -113,6 +121,7 @@ export default function Services() {
           style={{
             background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)',
             filter: 'blur(40px)',
+            y: blurY2,
           }}
           animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.65, 0.5] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
@@ -121,6 +130,10 @@ export default function Services() {
 
       {/* animated particle network — premium ambient background */}
       <NetworkBackground className="z-1" />
+
+      <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
+        JAANI
+      </span>
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
@@ -158,6 +171,7 @@ export default function Services() {
                 variants={cardVariants}
                 initial="hidden"
                 animate={gridInView ? 'visible' : 'hidden'}
+                className={i === 0 || i === 3 ? 'md:col-span-2' : ''}
               >
                 <TiltCard tiltDegree={4} glare={true} className="h-full">
                   <div className="group relative overflow-hidden bg-[#080808] p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#080808] hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] md:p-10">
