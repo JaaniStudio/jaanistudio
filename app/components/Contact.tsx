@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type FormEvent, type MouseEvent as ReactMouseEvent, useRef } from 'react';
+import { useState, type FormEvent, type MouseEvent as ReactMouseEvent, useRef, useCallback } from 'react';
 import {
   motion,
   useInView,
@@ -58,6 +58,75 @@ function ChevronIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d="m6 9 6 6 6-6" />
     </svg>
+  );
+}
+
+function PaperclipIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+    </svg>
+  );
+}
+
+function FileDropZone({ custom }: { custom: number }) {
+  const [dragOver, setDragOver] = useState(false);
+  const [fileName, setFileName] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(true);
+  }, []);
+
+  const handleDragLeave = useCallback(() => {
+    setDragOver(false);
+  }, []);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) setFileName(file.name);
+  }, []);
+
+  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) setFileName(file.name);
+  }, []);
+
+  return (
+    <motion.div custom={custom} variants={fieldVariants}>
+      <label className="mb-2 block text-xs uppercase tracking-widest text-[#8FA1AD]">
+        Attach file <span className="text-[#8FA1AD]/40">(optional)</span>
+      </label>
+      <motion.div
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={() => inputRef.current?.click()}
+        animate={{
+          borderColor: dragOver ? 'rgba(255,166,73,0.5)' : 'rgba(143,161,173,0.12)',
+          backgroundColor: dragOver ? 'rgba(255,166,73,0.04)' : 'transparent',
+        }}
+        transition={{ duration: 0.2 }}
+        className="relative flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed px-4 py-3 text-sm text-[#8FA1AD]/60 transition-colors duration-200 hover:border-[#FFA649]/25 hover:text-[#8FA1AD]"
+      >
+        <span className={fileName ? 'text-[#FFA649]' : ''}>
+          <PaperclipIcon />
+        </span>
+        <span className="truncate">
+          {fileName || 'Drop files here or click to browse'}
+        </span>
+      </motion.div>
+      <input
+        ref={inputRef}
+        type="file"
+        className="hidden"
+        onChange={handleFileChange}
+        accept=".pdf,.zip,.png,.jpg,.mp4,.mov,.doc,.docx"
+      />
+    </motion.div>
   );
 }
 
@@ -173,7 +242,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32"
+      className="relative overflow-hidden bg-[#0B0806] px-6 py-24 md:py-32"
       ref={sectionRef}
     >
       <div className="pointer-events-none absolute inset-0">
@@ -199,6 +268,10 @@ export default function Contact() {
 
       {/* animated particle network — premium ambient background */}
       <NetworkBackground className="z-1" />
+
+      <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
+        JAANI
+      </span>
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
@@ -439,6 +512,8 @@ export default function Contact() {
                           placeholder="What are you building, and by when?"
                         />
                       </motion.div>
+
+                      <FileDropZone custom={2.5} />
 
                       <SendButton custom={3} />
                     </motion.form>
