@@ -9,7 +9,7 @@ import Image from 'next/image';
 const ROTATING_WORDS = ['their mark.', 'different.', 'the scroll.', 'your inbox.'];
 const TAGS = ['Web Design', 'Brand Video', 'Motion Graphics', 'Social Cuts'];
 const LOGOS = ['Northbound', 'Fielder', 'Havenly', 'Marlow & Co', 'Ridgeline'];
-const HEADLINE_LINE_1 = 'Websites and video';
+const HEADLINE_LINE_1 = 'Sites & video';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -359,8 +359,7 @@ export default function Hero() {
           variants={childVariants}
           className="mt-6 max-w-xl text-md text-[#C9D3D9]"
         >
-          Jaani Studio designs sites and cuts video for brands who&rsquo;d rather be remembered
-          than ignored. One crew, one timeline, zero boring PDFs of &ldquo;brand guidelines.&rdquo;
+           Sites and video for brands who&rsquo;d rather be remembered than ignored. One crew, one timeline — zero &ldquo;brand guidelines&rdquo; PDFs.
         </motion.p>
 
         <motion.div variants={childVariants} className="mt-6 flex flex-wrap items-center gap-4">
