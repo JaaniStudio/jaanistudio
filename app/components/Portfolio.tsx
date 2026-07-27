@@ -127,17 +127,29 @@ function ProjectCard({
             {project.type === 'web' ? (
               <div className="absolute inset-0 flex flex-col bg-[#080808]">
                 <div className="flex items-center gap-1.5 border-b border-white/5 bg-[#080808] px-3 py-2">
-                  <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
-                  <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
-                  <span className="h-2 w-2 rounded-full bg-[#8FA1AD]/40" />
+                  <span className="h-2 w-2 rounded-full bg-[#FF5F57]" />
+                  <span className="h-2 w-2 rounded-full bg-[#FEBC2E]" />
+                  <span className="h-2 w-2 rounded-full bg-[#28C840]" />
+                </div>
+                <div className="flex items-center gap-1 border-b border-white/5 bg-[#080808]/50 px-3 py-1">
+                  <span className="flex items-center gap-1.5 max-w-[70%] truncate rounded bg-[#8FA1AD]/8 px-2 py-0.5 font-mono text-[9px] text-[#8FA1AD]/50">
+                    <span className="inline-block h-2.5 w-2.5 rounded-full border border-[#8FA1AD]/20" />
+                    {project.name.toLowerCase().replace(/\s+/g, '')}.com
+                  </span>
                 </div>
                 <div
                   className={`relative flex-1 bg-linear-to-br ${project.gradient} transition-all duration-700 group-hover:scale-105`}
+                  style={{
+                    backgroundImage: `linear-gradient(to bottom right, var(--tw-gradient-stops)), repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255,255,255,0.01) 20px, rgba(255,255,255,0.01) 21px), repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,255,255,0.01) 20px, rgba(255,255,255,0.01) 21px)`,
+                  }}
                 />
               </div>
             ) : (
               <div
                 className={`absolute inset-0 bg-linear-to-br ${project.gradient} transition-all duration-700 group-hover:scale-105`}
+                style={{
+                  backgroundImage: `linear-gradient(to bottom right, var(--tw-gradient-stops)), repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)`,
+                }}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
                     <motion.span
@@ -146,6 +158,10 @@ function ProjectCard({
                   >
                     <Play className="ml-0.5 h-5 w-5 fill-[#FFA649] text-[#FFA649]" />
                   </motion.span>
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-linear-to-t from-[#080808]/40 to-transparent" />
+                <div className="pointer-events-none absolute left-3 bottom-3 font-mono text-[9px] uppercase tracking-wider text-[#F3ECE0]/30">
+                  24fps · dci 4k
                 </div>
               </div>
             )}
