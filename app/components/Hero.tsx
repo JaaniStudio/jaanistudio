@@ -313,7 +313,7 @@ export default function Hero() {
             >
               that hit{' '}
               <span className="relative inline-block align-top text-[#FFA649]">
-                <span ref={wordRef} className="inline-block">
+                <span ref={wordRef} className="inline-block font-script">
                   {ROTATING_WORDS[wordIndex]}
                 </span>
               </span>

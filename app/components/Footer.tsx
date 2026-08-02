@@ -185,7 +185,7 @@ export default function Footer() {
               <span className="text-[#8FA1AD]">Outro</span>
             </motion.div>
             <h2 className="max-w-xl h-font text-4xl leading-[1.05] text-[#F3ECE0] sm:text-4xl md:text-5xl">
-              Let&rsquo;s cut something <span className="text-[#FFA649]">worth watching.</span>
+              Let&rsquo;s cut something <span className="font-script text-[#FFA649]">worth watching.</span>
             </h2>
           </div>
 
