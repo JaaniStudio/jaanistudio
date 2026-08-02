@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Code2, Clapperboard, Sparkles, Scissors } from 'lucide-react';
 import TiltCard from './TiltCard';
 import NetworkBackground from './NetworkBackground';
@@ -96,38 +96,8 @@ export default function Services() {
   const gridRef = useRef<HTMLDivElement>(null);
   const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-  const blurY1 = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-  const blurY2 = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
   return (
     <section id="services" className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32" ref={sectionRef}>
-      <div className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute -right-32 top-1/3 h-80 w-80 rounded-full opacity-50"
-          style={{
-            background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)',
-            filter: 'blur(35px)',
-            y: blurY1,
-          }}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.55, 0.4] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute -left-32 -bottom-16 h-96 w-96 rounded-full opacity-60"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-            y: blurY2,
-          }}
-          animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.65, 0.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-      </div>
-
       {/* animated particle network — premium ambient background */}
       <NetworkBackground className="z-1" />
 

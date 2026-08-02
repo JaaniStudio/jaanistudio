@@ -1,6 +1,7 @@
 import { ReactLenis } from 'lenis/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import TrustedBy from './components/TrustedBy';
 import About from './components/About';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
@@ -28,6 +29,7 @@ export default function Page() {
       <Navbar />
       <main>
         <Hero />
+        <TrustedBy />
         <SectionDivider />
         <Services />
         <SectionDivider />

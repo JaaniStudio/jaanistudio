@@ -8,7 +8,6 @@ import Image from 'next/image';
 
 const ROTATING_WORDS = ['their mark.', 'different.', 'the scroll.', 'your inbox.'];
 const TAGS = ['Web Design', 'Brand Video', 'Motion Graphics', 'Social Cuts'];
-const LOGOS = ['Northbound', 'Fielder', 'Havenly', 'Marlow & Co', 'Ridgeline'];
 const HEADLINE_LINE_1 = 'Sites & video';
 
 const containerVariants = {
@@ -49,9 +48,6 @@ export default function Hero() {
   const wordRef = useRef<HTMLSpanElement>(null);
   const [wordIndex, setWordIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const marqueeRef = useRef<HTMLDivElement>(null);
-  const [logoMarqueeHover, setLogoMarqueeHover] = useState(false);
-  const logoMarqueeHoverRef = useRef(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const [charInteracted, setCharInteracted] = useState(false);
   const charControls = useAnimationControls();
@@ -218,43 +214,13 @@ export default function Hero() {
     return () => { cancelled = true; };
   }, [mounted]);
 
-  useEffect(() => {
-    logoMarqueeHoverRef.current = logoMarqueeHover;
-  }, [logoMarqueeHover]);
-
-  // logo marquee — rAF loop, pauses on hover
-  useEffect(() => {
-    const el = marqueeRef.current;
-    if (!el) return;
-    let rafId: number;
-    let start: number | null = null;
-    let pausedAt = 0;
-    const duration = 24000;
-
-    const tick = (ts: number) => {
-      if (!start) start = ts;
-      if (logoMarqueeHoverRef.current) {
-        start = ts - pausedAt;
-        rafId = requestAnimationFrame(tick);
-        return;
-      }
-      pausedAt = ts - start;
-      const progress = (pausedAt % duration) / duration;
-      el.style.transform = `translateX(${-progress * 50}%)`;
-      rafId = requestAnimationFrame(tick);
-    };
-
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
-
   return (
     <section
       id="top"
       ref={rootRef}
       onMouseMove={handlePointerMove}
       onMouseLeave={handlePointerLeave}
-      className="relative overflow-hidden bg-[#080808] px-6 pb-24 pt-24 md:pb-32 md:pt-24"
+      className="relative min-h-dvh overflow-hidden bg-[#080808] px-6 pt-24 md:pt-24"
     >
       {/* ambient top wash for depth */}
       <motion.div
@@ -377,48 +343,58 @@ export default function Hero() {
           variants={childVariants}
           className="relative mx-auto h-65 w-full max-w-2xl [perspective:1200px]] md:h-75"
         >
-          {/* theatrical beam falling onto the character */}
+          {/* THEATRICAL SPOTLIGHT BEAM — stage light pouring from above */}
           <div
-            className="pointer-events-none absolute left-1/2 -top-10 h-55 w-42.5 -translate-x-1/2"
+            className="pointer-events-none absolute left-1/2 -top-10 h-60 w-46 -translate-x-1/2"
             style={{
-              background: 'linear-gradient(to bottom, rgba(255,166,73,0.30), rgba(255,166,73,0))',
-              clipPath: 'polygon(44% 0%, 56% 0%, 100% 100%, 0% 100%)',
-              filter: 'blur(8px)',
+              background: 'linear-gradient(to bottom, rgba(255,166,73,0.10) 0%, rgba(255,166,73,0.28) 50%, rgba(255,166,73,0.05) 100%)',
+              clipPath: 'polygon(40% 0%, 60% 0%, 80% 100%, 20% 100%)',
+              filter: 'blur(14px)',
             }}
           />
 
-          {/* soft radial glow, brightest at the base, fading upward — drifts gently with the cursor */}
+          {/* STAGE FLOOR SPOTLIGHT — bright core where the character stands */}
           <motion.div
-            className="pointer-events-none absolute left-1/2 bottom-0 h-57.5 w-full max-w-2xl -translate-x-1/2"
+            className="pointer-events-none absolute left-1/2 bottom-0 h-20 w-72 -translate-x-1/2"
             style={{
               background:
-                'radial-gradient(ellipse 55% 70% at 50% 85%, rgba(255,166,73,0.38) 0%, rgba(255,166,73,0.16) 40%, transparent 72%)',
-              filter: 'blur(26px)',
+                'radial-gradient(ellipse 50% 100% at 50% 100%, rgba(255,166,73,0.7) 0%, rgba(255,166,73,0.25) 35%, transparent 60%)',
+              filter: 'blur(5px)',
+              x: useTransform(springX, [-1, 1], [-8, 8]),
+              y: useTransform(springY, [-1, 1], [-1, 1]),
+            }}
+          />
+
+          {/* AMBIENT FLOOR WASH — fills the stage with soft warmth */}
+          <motion.div
+            className="pointer-events-none absolute left-1/2 bottom-0 h-64 w-full max-w-2xl -translate-x-1/2"
+            style={{
+              background:
+                'radial-gradient(ellipse 50% 60% at 50% 85%, rgba(255,166,73,0.18) 0%, transparent 60%)',
+              filter: 'blur(32px)',
               x: glowX,
               y: glowY,
             }}
           />
 
-          {/* brighter core */}
-          <motion.div
-            className="pointer-events-none absolute left-1/2 bottom-0 h-57.5 w-full max-w-2xl -translate-x-1/2"
+          {/* SUBTLE STAGE PLATFORM LINE */}
+          <div
+            className="pointer-events-none absolute left-1/2 bottom-2 h-px w-96 -translate-x-1/2"
             style={{
               background:
-                'radial-gradient(ellipse 22% 30% at 50% 92%, rgba(255,166,73,0.55) 0%, transparent 70%)',
-              filter: 'blur(10px)',
-              x: glowX,
-              y: glowY,
+                'linear-gradient(to right, transparent 10%, rgba(255,166,73,0.4) 30%, rgba(255,166,73,0.6) 50%, rgba(255,166,73,0.4) 70%, transparent 90%)',
+              filter: 'blur(1px)',
             }}
           />
 
-          {/* grounding shadow beneath the character — breathes opposite the float */}
+          {/* GROUNDING SHADOW — beneath the character, breathes opposite the float */}
           <motion.div
-            className="pointer-events-none absolute left-1/2 bottom-3 h-6 w-40 -translate-x-1/2 rounded-full"
+            className="pointer-events-none absolute left-1/2 bottom-1 h-4 w-36 -translate-x-1/2 rounded-full"
             style={{
-              background: 'radial-gradient(ellipse, rgba(0,0,0,0.45) 0%, transparent 75%)',
-              filter: 'blur(4px)',
+              background: 'radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, transparent 75%)',
+              filter: 'blur(5px)',
             }}
-            animate={{ scaleX: [1, 0.82, 1], opacity: [0.9, 0.6, 0.9] }}
+            animate={{ scaleX: [1, 0.8, 1], opacity: [0.9, 0.5, 0.9] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
           />
 
@@ -529,33 +505,6 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        <motion.div
-          variants={childVariants}
-          className="relative mt-16 overflow-hidden border-t border-[#FFA649]/10 pt-8"
-          style={{
-            maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-          }}
-        >
-          <p className="mb-4 text-xs text-[#8FA1AD]">
-            Trusted by teams who used to have fourteen unread Slack messages from their old agency
-          </p>
-          <div
-            ref={marqueeRef}
-            onMouseEnter={() => setLogoMarqueeHover(true)}
-            onMouseLeave={() => setLogoMarqueeHover(false)}
-            className="flex w-max items-center gap-12"
-          >
-            {[...LOGOS, ...LOGOS].map((logo, i) => (
-              <span
-                key={`${logo}-${i}`}
-                className="whitespace-nowrap h-font text-sm font-semibold text-[#F3ECE0]/40 transition-colors duration-300 hover:text-[#F3ECE0]/80"
-              >
-                {logo}
-              </span>
-            ))}
-          </div>
-        </motion.div>
       </motion.div>
 
       {/* scroll cue — visible on load, fades once the person actually scrolls */}

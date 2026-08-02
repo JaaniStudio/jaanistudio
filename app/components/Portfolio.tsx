@@ -231,27 +231,6 @@ export default function Portfolio() {
     <section id="work" className="relative" ref={sectionRef}>
       <div style={{ height: `${filtered.length * 100}vh` }}>
         <div className="sticky top-0 flex h-screen flex-col overflow-hidden bg-[#080808]">
-          <div className="pointer-events-none absolute inset-0">
-            <motion.div
-              className="absolute -right-24 -top-24 h-80 w-80 rounded-full opacity-40"
-              style={{
-                background: 'radial-gradient(circle, rgba(255,166,73,0.4) 0%, transparent 70%)',
-                filter: 'blur(45px)',
-              }}
-              animate={{ scale: [1, 1.12, 1], opacity: [0.3, 0.45, 0.3] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <motion.div
-              className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full opacity-30"
-              style={{
-                background: 'radial-gradient(circle, rgba(143,161,173,0.3) 0%, transparent 70%)',
-                filter: 'blur(40px)',
-              }}
-              animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
-              transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            />
-          </div>
-          
           {/* animated particle network — premium ambient background */}
           <NetworkBackground className="z-1" />
 

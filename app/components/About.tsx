@@ -270,27 +270,6 @@ export default function About() {
         className="relative overflow-hidden bg-[#09070B] px-6 py-24 md:py-32"
         ref={sectionRef}
       >
-        <div className="pointer-events-none absolute inset-0">
-          <motion.div
-            className="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-60"
-            style={{
-              background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)',
-              filter: 'blur(40px)',
-            }}
-            animate={{ scale: [1, 1.12, 1], opacity: [0.5, 0.65, 0.5] }}
-            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full opacity-50"
-            style={{
-              background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)',
-              filter: 'blur(35px)',
-            }}
-            animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.55, 0.4] }}
-            transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-          />
-        </div>
-        
         {/* animated particle network — premium ambient background */}
         <NetworkBackground className="z-1" />
 
@@ -399,16 +378,6 @@ export default function About() {
         className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32"
         ref={teamRef}
       >
-        <div className="pointer-events-none absolute inset-0">
-          <div
-            className="absolute -left-24 top-1/3 h-72 w-72 rounded-full opacity-40"
-            style={{
-              background: 'radial-gradient(circle, rgba(255,166,73,0.3) 0%, transparent 70%)',
-              filter: 'blur(50px)',
-            }}
-          />
-        </div>
-
         {/* animated particle network — premium ambient background */}
         <NetworkBackground className="z-1" />
 

@@ -186,27 +186,6 @@ export default function Contact() {
       className="relative overflow-hidden bg-[#0B0806] px-6 py-24 md:py-32"
       ref={sectionRef}
     >
-      <div className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute -left-32 -top-32 h-96 w-96 rounded-full opacity-60"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)',
-            filter: 'blur(35px)',
-          }}
-          animate={{ scale: [1, 1.14, 1], opacity: [0.5, 0.65, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute -right-32 -bottom-32 h-80 w-80 rounded-full opacity-50"
-          style={{
-            background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)',
-            filter: 'blur(30px)',
-          }}
-          animate={{ scale: [1, 1.16, 1], opacity: [0.4, 0.55, 0.4] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
-        />
-      </div>
-
       {/* animated particle network — premium ambient background */}
       <NetworkBackground className="z-1" />
 

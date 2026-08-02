@@ -118,15 +118,6 @@ export default function Footer() {
     <footer className="relative overflow-hidden bg-[#080808] px-6 pb-8 pt-20 md:pt-28" ref={sectionRef}>
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-60"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,166,73,0.45) 0%, transparent 70%)',
-            filter: 'blur(35px)',
-          }}
-          animate={{ scale: [1, 1.14, 1], opacity: [0.5, 0.65, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
           className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full opacity-50"
           style={{
             background: 'radial-gradient(circle, rgba(143,161,173,0.35) 0%, transparent 70%)',
