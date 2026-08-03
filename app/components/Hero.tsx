@@ -289,11 +289,11 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFA649] opacity-50" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#FFA649]" />
             </span>
-            Say jaani — now booking Q3
+            Say jaani — booking Q3 2026
           </span>
         </motion.div>
 
-        <h1 className="h-font text-5xl leading-[0.95] tracking-tight text-[#F3ECE0] sm:text-4xl md:text-6xl lg:text-[3.5rem]">
+        <h1 className="h-font text-5xl font-light leading-[0.95] tracking-tight text-[#F3ECE0] sm:text-5xl md:text-6xl lg:text-[3.5rem]">
           <span className="block overflow-hidden pb-1">
             <span className="inline-block">
               {HEADLINE_LINE_1.split('').map((ch, i) => (
@@ -313,7 +313,7 @@ export default function Hero() {
             >
               that hit{' '}
               <span className="relative inline-block align-top text-[#FFA649]">
-                <span ref={wordRef} className="inline-block font-script">
+                <span ref={wordRef} className="inline-block font-script text-[1.25em] leading-[0.85]">
                   {ROTATING_WORDS[wordIndex]}
                 </span>
               </span>
@@ -443,7 +443,7 @@ export default function Hero() {
               >
                 <Image
                   src={'/char.png'}
-                  className='grab'
+                  className='grab w-full max-w-[350px] h-auto'
                   alt="Main character — drag or tap to say hi"
                   width={350}
                   height={350}
