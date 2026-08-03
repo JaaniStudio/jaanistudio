@@ -190,7 +190,7 @@ export default function Contact() {
       <NetworkBackground className="z-1" />
 
       <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
-        JAANI
+        BRIEF
       </span>
 
       <div className="relative z-10 mx-auto max-w-6xl">
