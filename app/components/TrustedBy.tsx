@@ -19,6 +19,10 @@ export default function TrustedBy() {
   useEffect(() => {
     const el = marqueeRef.current;
     if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.transform = 'translateX(0)';
+      return;
+    }
     let rafId: number;
     let start: number | null = null;
     let pausedAt = 0;
@@ -67,11 +71,22 @@ export default function TrustedBy() {
             className="flex w-max items-center gap-12"
           >
             {[...LOGOS, ...LOGOS].map((logo, i) => (
-              <span
-                key={`${logo}-${i}`}
-                className="whitespace-nowrap h-font text-sm font-semibold text-[#F3ECE0]/40 transition-colors duration-300 hover:text-[#F3ECE0]/80"
-              >
-                {logo}
+              <span key={`${logo}-${i}`} className="flex items-center gap-12">
+                <span
+                  className={`whitespace-nowrap transition-all duration-300 hover:text-[#FFA649] ${
+                    i % 2 === 0
+                      ? 'h-font text-base font-semibold text-[#F3ECE0]/45 hover:scale-105'
+                      : 'font-script text-2xl text-[#FFA649]/70 hover:scale-110'
+                  }`}
+                >
+                  {logo}
+                </span>
+                <span
+                  className="inline-block select-none text-[#FFA649]/40 transition-all duration-300 hover:rotate-180 hover:text-[#FFA649]"
+                  style={{ transitionProperty: 'color, transform' }}
+                >
+                  ✦
+                </span>
               </span>
             ))}
           </div>
