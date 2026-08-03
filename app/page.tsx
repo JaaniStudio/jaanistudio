@@ -6,6 +6,7 @@ import About from './components/About';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
+import Process from './components/Process';
 import Footer from './components/Footer';
 
 function SectionDivider() {
@@ -36,6 +37,7 @@ export default function Page() {
         <Portfolio />
         <SectionDivider />
         <About />
+        <Process />
         <SectionDivider />
         <Contact />
       </main>
