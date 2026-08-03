@@ -241,6 +241,10 @@ export default function About() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.transform = 'translateX(0)';
+      return;
+    }
     let rafId: number;
     let start: number | null = null;
     let pausedAt = 0;
@@ -274,7 +278,7 @@ export default function About() {
         <NetworkBackground className="z-1" />
 
         <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
-          JAANI
+          ORIGIN
         </span>
 
         <div className="relative z-10 mx-auto max-w-6xl">
@@ -378,11 +382,8 @@ export default function About() {
         className="relative overflow-hidden bg-[#080808] px-6 py-24 md:py-32"
         ref={teamRef}
       >
-        {/* animated particle network — premium ambient background */}
-        <NetworkBackground className="z-1" />
-
         <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
-          STUDIO
+          CREW
         </span>
 
         <div className="relative z-10 mx-auto max-w-6xl">
