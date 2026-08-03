@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import NetworkBackground from './NetworkBackground';
+import SectionGlow from './SectionGlow';
 
 function InstagramIcon({ size = 15 }: { size?: number }) {
   return (
@@ -276,6 +277,9 @@ export default function About() {
       >
         {/* animated particle network — premium ambient background */}
         <NetworkBackground className="z-1" />
+
+        {/* aurora glow — clipped to this section */}
+        <SectionGlow className="left-[-12rem] top-[-10rem]" color="152,132,186" opacity={0.13} />
 
         <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
           ORIGIN

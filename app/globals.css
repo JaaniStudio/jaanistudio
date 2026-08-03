@@ -159,3 +159,20 @@ html {
   0%, 100% { box-shadow: 0 0 20px rgba(255, 166, 73, 0.15); }
   50% { box-shadow: 0 0 40px rgba(255, 166, 73, 0.3); }
 }
+
+/* Aurora section glows — contained per section, never bleed into neighbours */
+.aurora {
+  animation: glow-breathe 18s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: var(--glow-o, 0.12); }
+  50% { opacity: calc(var(--glow-o, 0.12) * 1.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora {
+    animation: none;
+  }
+}

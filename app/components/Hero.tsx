@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, startTransition } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence, useAnimationControls } from 'framer-motion';
 import MagneticButton from './MagneticButton';
 import NetworkBackground from './NetworkBackground';
+import SectionGlow from './SectionGlow';
 import Image from 'next/image';
 
 const ROTATING_WORDS = ["results.", "clicks.", "sales.", "growth."];
@@ -253,6 +254,9 @@ export default function Hero() {
 
       {/* animated particle network — premium ambient background */}
       <NetworkBackground className="z-1" />
+
+      {/* aurora glow — clipped to this section */}
+      <SectionGlow className="left-[-14rem] top-[-11rem]" color="255,166,73" opacity={0.16} />
 
       {/* cinematic curtain reveal */}
       <motion.div
