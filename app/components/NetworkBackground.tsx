@@ -193,7 +193,7 @@ export default function NetworkBackground({
 
   return (
     <div className={`pointer-events-none absolute inset-0 ${className}`} style={{ opacity }}>
-      <canvas ref={canvasRef} className="pointer-events-auto h-full w-full" />
+      <canvas ref={canvasRef} className="h-full w-full" />
     </div>
   );
 }
