@@ -46,7 +46,7 @@ export default function MagneticButton({
     }
   };
 
-  const baseClasses = 'relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold transition-transform duration-200 ease-out active:scale-[0.97]';
+  const baseClasses = 'relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold font-[family-name:var(--font-display)] transition-transform duration-200 ease-out active:scale-[0.97]';
 
   const variantClasses = {
     primary:

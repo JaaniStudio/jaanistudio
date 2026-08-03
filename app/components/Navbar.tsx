@@ -92,7 +92,7 @@ export default function Navbar() {
         <div className="hidden md:block">
           <Link
             href="#contact"
-            className="group relative overflow-hidden rounded-full bg-[#FFA649] px-5 py-2.5 text-sm font-semibold text-[#1B262E] transition-all duration-300 hover:shadow-[0_8px_24px_-6px_rgba(255,166,73,0.65)] active:scale-[0.95]"
+            className="group relative overflow-hidden rounded-full bg-[#FFA649] px-5 py-2.5 text-sm font-semibold font-[family-name:var(--font-display)] text-[#1B262E] transition-all duration-300 hover:shadow-[0_8px_24px_-6px_rgba(255,166,73,0.65)] active:scale-[0.95]"
             data-cursor
           >
             <motion.span
@@ -181,7 +181,7 @@ export default function Navbar() {
                     <Link
                       href="#contact"
                       onClick={() => setMenuOpen(false)}
-                      className="mt-2 block rounded-full bg-[#FFA649] px-5 py-3 text-center text-sm font-semibold text-[#1B262E] active:scale-[0.96]"
+                      className="mt-2 block rounded-full bg-[#FFA649] px-5 py-3 text-center text-sm font-semibold font-[family-name:var(--font-display)] text-[#1B262E] active:scale-[0.96]"
                     >
                       Start a project
                     </Link>
