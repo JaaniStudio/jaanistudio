@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const NAV_LINKS = [
   { label: 'Services', href: '#services' },
@@ -48,19 +49,22 @@ export default function Navbar() {
       </div>
 
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:py-5">
-        <Link href="#top" className="group flex items-center gap-2">
+        <Link href="#top" className="group flex items-center gap-2" aria-label="Jaani Studio — back to top">
           <motion.span
-            className="relative flex h-2.5 w-2.5"
+            className="relative flex h-13 w-13"
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
           >
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FFA649] opacity-40" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#FFA649]" />
+            <Image
+              src="/logo.png"
+              alt="Jaani Studio logo"
+              width={52}
+              height={52}
+              className="h-13 w-13 object-contain drop-shadow-[0_0_18px_rgba(255,166,73,0.45)]"
+              priority
+              draggable={false}
+            />
           </motion.span>
-          <span className="font-[--font-display] text-lg font-bold tracking-tight text-[#F3ECE0]">
-            JAANI
-            <span className="text-[#FFA649]">.studio</span>
-          </span>
         </Link>
 
         <div className="hidden items-center gap-10 md:flex">
