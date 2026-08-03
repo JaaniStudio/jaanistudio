@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${plexMono.variable}`}>
-      <body className="bg-[#080808] font-sans">
+      <body className="bg-[#080808]">
         <CustomCursor />
         {children}
       </body>

@@ -43,8 +43,8 @@
 :root {
   --primary: #080808;
   --secondary: #FFA649;
-  --font-display: 'Tactic Sans', 'Helvetica', sans-serif;
-  --font-body: 'Helvetica', 'Arial', sans-serif;
+  --font-display: 'Helvetica', 'Tactic Sans', sans-serif;
+  --font-body: 'Tactic Sans', 'Helvetica', 'Arial', sans-serif;
   --font-script: 'Shelley Regular', cursive;
 }
 
