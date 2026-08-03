@@ -4,7 +4,6 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import MagneticButton from './MagneticButton';
-import NetworkBackground from './NetworkBackground';
 
 const SITEMAP = [
   { label: 'Work', href: '#work' },
@@ -68,6 +67,7 @@ export default function Footer() {
 
   useEffect(() => {
     let cancelled = false;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     (async () => {
       const { animate } = await import('animejs');
       if (cancelled || !marqueeWrapRef.current) return;
@@ -87,6 +87,10 @@ export default function Footer() {
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.transform = 'translateX(0)';
+      return;
+    }
     let rafId: number;
     let start: number | null = null;
     let pausedAt = 0;
@@ -128,11 +132,8 @@ export default function Footer() {
         />
       </div>
 
-      {/* animated particle network — premium ambient background */}
-      <NetworkBackground className="z-1" />
-
       <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none h-font text-[clamp(6rem,15vw,16rem)] font-bold text-[#F3ECE0] opacity-[0.015] leading-none tracking-tighter whitespace-nowrap">
-        STUDIO
+        OUTRO
       </span>
 
       <div
