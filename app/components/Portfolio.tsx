@@ -24,6 +24,7 @@ interface Project {
   category: string;
   meta: string;
   gradient: string;
+  link: string;
 }
 
 const PROJECTS: Project[] = [
@@ -35,6 +36,7 @@ const PROJECTS: Project[] = [
     category: 'Brand site + launch page',
     meta: 'Live site',
     gradient: 'from-[#FFA649]/25 via-[#080808] to-[#080808]',
+    link: 'https://northbound.coffee',
   },
   {
     id: 'p2',
@@ -44,6 +46,7 @@ const PROJECTS: Project[] = [
     category: 'Product launch film',
     meta: '1:24',
     gradient: 'from-[#8FA1AD]/25 via-[#080808] to-[#080808]',
+    link: 'https://vimeo.com/jaanistudio/fielder-outdoor',
   },
   {
     id: 'p3',
@@ -53,6 +56,7 @@ const PROJECTS: Project[] = [
     category: 'E-commerce build',
     meta: 'Live site',
     gradient: 'from-[#FFA649]/20 via-[#080808] to-[#080808]',
+    link: 'https://havenly.com',
   },
   {
     id: 'p4',
@@ -62,6 +66,7 @@ const PROJECTS: Project[] = [
     category: 'Founder story',
     meta: '2:10',
     gradient: 'from-[#8FA1AD]/20 via-[#080808] to-[#080808]',
+    link: 'https://vimeo.com/jaanistudio/marlow-co',
   },
   {
     id: 'p5',
@@ -71,6 +76,7 @@ const PROJECTS: Project[] = [
     category: 'Social content, 40 clips',
     meta: '0:38',
     gradient: 'from-[#FFA649]/25 via-[#080808] to-[#080808]',
+    link: 'https://vimeo.com/jaanistudio/ridgeline-media',
   },
   {
     id: 'p6',
@@ -80,6 +86,7 @@ const PROJECTS: Project[] = [
     category: 'Booking site + dashboard',
     meta: 'Live site',
     gradient: 'from-[#8FA1AD]/25 via-[#080808] to-[#080808]',
+    link: 'https://northlinedental.com',
   },
 ];
 
@@ -120,8 +127,10 @@ function ProjectCard({
       <motion.div style={{ scale: focusScale, opacity: focusOpacity }} className="h-full">
         <TiltCard tiltDegree={3} glare className="h-full">
           <a
-            href="#contact"
-            className="group relative block h-full overflow-hidden rounded-xl border border-[#FFA649]/10 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[#FFA649]/30 hover:shadow-[0_20px_50px_-16px_rgba(255,166,73,0.25)]"
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative block h-full overflow-hidden rounded-xl border border-[#FFA649]/10 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[#FFA649]/30 hover:shadow-[0_20px_50px_-16px_rgba(255,166,73,0.35)] active:scale-[0.98]"
             data-cursor
           >
             {project.type === 'web' ? (
@@ -166,6 +175,12 @@ function ProjectCard({
               </div>
             )}
 
+            {/* hover scrim — lifts text legibility over the visual */}
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/60 via-black/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+            {/* reel scrub play line — fills as you hover, like a timeline */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px] w-0 bg-[#FFA649] transition-[width] duration-700 ease-out group-hover:w-full" />
+
             <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-6">
               <div className="flex items-center justify-between">
                 <span className="w-fit rounded bg-[#080808]/70 px-2 py-1 font-mono text-[11px] text-[#FFA649] backdrop-blur transition-all duration-300 group-hover:bg-[#FFA649]/20">
@@ -186,6 +201,9 @@ function ProjectCard({
                   {project.category}
                 </p>
               </div>
+              <span className="absolute bottom-5 right-5 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-[#FFA649] text-[#1B262E] opacity-0 shadow-[0_8px_20px_-8px_rgba(255,166,73,0.6)] transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                <ArrowUpRight className="h-4 w-4" strokeWidth={2.25} />
+              </span>
             </div>
           </a>
         </TiltCard>
