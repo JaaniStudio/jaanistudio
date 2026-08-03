@@ -6,7 +6,7 @@ import MagneticButton from './MagneticButton';
 import NetworkBackground from './NetworkBackground';
 import Image from 'next/image';
 
-const ROTATING_WORDS = ['their mark.', 'different.', 'the scroll.', 'your inbox.'];
+const ROTATING_WORDS = ["results.", "clicks.", "sales.", "growth."];
 const TAGS = ['Web Design', 'Brand Video', 'Motion Graphics', 'Social Cuts'];
 const HEADLINE_LINE_1 = 'Sites & video';
 
